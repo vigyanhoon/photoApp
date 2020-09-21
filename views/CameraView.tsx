@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Button,
-  TouchableOpacity,
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
@@ -12,12 +11,12 @@ const PendingView = () => (
   <View
     style={{
       flex: 1,
-      backgroundColor: 'lightgreen',
+      backgroundColor: 'red',
       justifyContent: 'center',
       alignItems: 'center',
     }}
   >
-    <Text>Waiting</Text>
+    <Text style={{color:'red'}}>Waiting</Text>
   </View>
 );
 
@@ -29,7 +28,6 @@ class CameraView extends PureComponent {
 
   takePicture = async function (camera) {
     try {
-      // camera.resumePreview();
       const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
       console.log(data.uri);
@@ -53,27 +51,16 @@ class CameraView extends PureComponent {
             buttonPositive: 'Ok',
             buttonNegative: 'Cancel',
           }}
-          androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
         >
-          {({ camera, status, recordAudioPermissionStatus }) => {
+          {({ camera, status }) => {
             if (status !== 'READY') return <PendingView />;
             return (
-              <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-                  <Text style={{ fontSize: 14 }}> SNAP </Text>
-                </TouchableOpacity>
+              <View style={styles.button}>
+                <Button title='SNAP' onPress={() => this.takePicture(camera)}></Button>
               </View>
             );
           }}
         </RNCamera>
-        {/* <View style={styles.button}>
-          <Button title='Take Photo' onPress={this.takePhoto}></Button>
-        </View> */}
       </View>
     );
   }
@@ -81,10 +68,15 @@ class CameraView extends PureComponent {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: '#abc'
+    backgroundColor: '#abc',
+    flex: 1,
+    height: 500
   },
   button: {
-    margin: 100
+    flex: 1,
+    backgroundColor: 'red',
+    height: 100,
+    width: 500
   },
   preview: {
     flex: 1,

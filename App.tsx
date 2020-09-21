@@ -10,17 +10,6 @@ import {
 import CameraView from './views/CameraView';
 
 const App: () => React.ReactNode = () => {
-  let cameraRef = React.useRef();
-
-  const takePhoto = async () => {
-    console.log('button pressed')
-    if (cameraRef.current) {
-      const options = { quality: 0.5, base64: true };
-      const data = await cameraRef.current.takePictureAsync(options);
-      console.log(data.uri);
-    }
-  }
-
   const openGallery = () => {
     console.log('button pressed')
   }
@@ -28,7 +17,7 @@ const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView>
+      <SafeAreaView style={styles.body}>
         <CameraView/>
         {/* <View style={styles.body}>
           <View style={styles.button}>
@@ -45,7 +34,7 @@ const App: () => React.ReactNode = () => {
 
 const styles = StyleSheet.create({
   body: {
-    padding: 50
+    flex: 1
   },
   button: {
     margin: 10
