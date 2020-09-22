@@ -3,7 +3,7 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
+  TouchableOpacity
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
@@ -16,7 +16,7 @@ const PendingView = () => (
       alignItems: 'center',
     }}
   >
-    <Text style={{color:'red'}}>Waiting</Text>
+    <Text style={{ color: 'red' }}>Waiting</Text>
   </View>
 );
 
@@ -26,7 +26,7 @@ class CameraView extends PureComponent {
     super(props)
   }
 
-  takePicture = async function (camera) {
+  takePicture = async function (camera: RNCamera) {
     try {
       const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
@@ -39,7 +39,6 @@ class CameraView extends PureComponent {
   render() {
     return (
       <View style={styles.root}>
-        <Text>sdaf</Text>
         <RNCamera
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
@@ -56,7 +55,9 @@ class CameraView extends PureComponent {
             if (status !== 'READY') return <PendingView />;
             return (
               <View style={styles.button}>
-                <Button title='SNAP' onPress={() => this.takePicture(camera)}></Button>
+                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
+                  <Text style={{ fontSize: 14 }}> SNAP </Text>
+                </TouchableOpacity>
               </View>
             );
           }}
@@ -68,12 +69,10 @@ class CameraView extends PureComponent {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: '#abc',
     flex: 1,
-    height: 500
   },
   button: {
-    flex: 1,
+    flex: 0,
     backgroundColor: 'red',
     height: 100,
     width: 500

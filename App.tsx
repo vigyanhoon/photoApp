@@ -1,43 +1,32 @@
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  Button,
 } from 'react-native';
+
+import Home from './views/Home'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import CameraView from './views/CameraView';
 
-const App: () => React.ReactNode = () => {
-  const openGallery = () => {
-    console.log('button pressed')
-  }
+const Stack = createStackNavigator();
 
+const App: () => React.ReactNode = () => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.body}>
-        <CameraView/>
-        {/* <View style={styles.body}>
-          <View style={styles.button}>
-            <Button title='Take Photo' onPress={takePhoto}></Button>
-          </View>
-          <View style={styles.button}>
-            <Button title='Open Gallery' onPress={openGallery}></Button>
-          </View>
-        </View> */}
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Camera" component={CameraView} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1
-  },
-  button: {
-    margin: 10
+    flex: 1,
   },
 });
 
