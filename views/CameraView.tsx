@@ -14,8 +14,7 @@ const PendingView = () => (
       backgroundColor: 'red',
       justifyContent: 'center',
       alignItems: 'center',
-    }}
-  >
+    }}>
     <Text style={{ color: 'red' }}>Waiting</Text>
   </View>
 );

@@ -8,6 +8,7 @@ import {
 const Home = ({navigation}) => {
   const openGallery = () => {
     console.log('gallery pressed')
+    navigation.navigate('Gallery')
   }
 
   const openCamera = () => {

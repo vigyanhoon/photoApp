@@ -8,6 +8,7 @@ import Home from './views/Home'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CameraView from './views/CameraView';
+import GalleryView from './views/GalleryView';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ const App: () => React.ReactNode = () => {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Camera" component={CameraView} />
+          <Stack.Screen name="Gallery" component={GalleryView} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
