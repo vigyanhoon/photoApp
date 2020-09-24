@@ -9,6 +9,7 @@ import {
 var RNFS = require('react-native-fs');
 
 import { Dimensions } from 'react-native';
+import {getFilePaths} from '../common/ImageSaver';
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
@@ -19,14 +20,19 @@ const GalleryView = () => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    RNFS.readDir(imagePath)
-      .then((result: { path: any; }[]) => {
-        console.log('GOT RESULT', result);
-        setImages(result)
-      })
-      .catch((err: { message: any; code: any; }) => {
-        console.log(err.message, err.code);
-      });
+    (async ()=>{
+      const paths:string[] = await getFilePaths()
+      console.log('paths in gallery ' + paths)
+      setImages(paths)
+    })()
+    // RNFS.readDir(imagePath)
+    //   .then((result: { path: any; }[]) => {
+    //     console.log('GOT RESULT', result);
+    //     setImages(result)
+    //   })
+    //   .catch((err: { message: any; code: any; }) => {
+    //     console.log(err.message, err.code);
+    //   });
   }, [])
 
   return (
@@ -34,7 +40,7 @@ const GalleryView = () => {
       {images.map((img, index) => {
         return <Image key={index}
           style={styles.thumb}
-          source={{ uri: 'file:/' + imagePath + img.name }} />
+          source={{ uri: img}} />
       }
       )}
     </View>

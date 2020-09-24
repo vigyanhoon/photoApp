@@ -6,6 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import {saveFilePaths} from '../common/ImageSaver';
 
 const PendingView = () => (
   <View
@@ -20,7 +21,6 @@ const PendingView = () => (
 );
 
 class CameraView extends PureComponent {
-  camera: any;
   constructor(props) {
     super(props)
   }
@@ -29,7 +29,7 @@ class CameraView extends PureComponent {
     try {
       const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
-      console.log(data.uri);
+      saveFilePaths(data.uri)
     } catch (error) {
       console.log(error)
     }
