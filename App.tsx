@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CameraView from './views/CameraView';
 import GalleryView from './views/GalleryView';
+import ImageView from './views/ImageView';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const App: () => React.ReactNode = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Camera" component={CameraView} />
           <Stack.Screen name="Gallery" component={GalleryView} />
+          <Stack.Screen name="Image" component={ImageView} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

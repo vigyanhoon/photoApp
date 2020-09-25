@@ -12,7 +12,6 @@ const PendingView = () => (
   <View
     style={{
       flex: 1,
-      backgroundColor: 'red',
       justifyContent: 'center',
       alignItems: 'center',
     }}>
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 0,
-    backgroundColor: 'red',
     height: 100,
     width: 500
   },

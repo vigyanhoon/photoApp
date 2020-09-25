@@ -6,43 +6,38 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-var RNFS = require('react-native-fs');
-
 import { Dimensions } from 'react-native';
-import {getFilePaths} from '../common/ImageSaver';
+import { getFilePaths } from '../common/ImageSaver';
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
 
-const imagePath = 'data/user/0/com.photoapp/cache/Camera/'
-
-const GalleryView = () => {
+const GalleryView = ({navigation}) => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
-    (async ()=>{
-      const paths:string[] = await getFilePaths()
+    (async () => {
+      const paths: string[] = await getFilePaths()
       console.log('paths in gallery ' + paths)
       setImages(paths)
     })()
-    // RNFS.readDir(imagePath)
-    //   .then((result: { path: any; }[]) => {
-    //     console.log('GOT RESULT', result);
-    //     setImages(result)
-    //   })
-    //   .catch((err: { message: any; code: any; }) => {
-    //     console.log(err.message, err.code);
-    //   });
   }, [])
+
+  const openImageView = (index:number)=> {
+    console.log('image pressed ' + index)
+    const path = images[index]
+    navigation.navigate('Image', {path})
+  }
 
   return (
     <View style={styles.root}>
       {images.map((img, index) => {
-        return <Image key={index}
-          style={styles.thumb}
-          source={{ uri: img}} />
-      }
-      )}
+        return (
+          <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
+              <Image style={styles.thumb} source={{ uri: img}} />
+          </TouchableOpacity>
+        )
+      })}
     </View>
   )
 }
@@ -50,7 +45,6 @@ const GalleryView = () => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'green',
     padding: 10,
     flexDirection: 'row',
     flexWrap: 'wrap'
@@ -58,8 +52,14 @@ const styles = StyleSheet.create({
   thumb: {
     width: thumbWidth,
     height: thumbWidth,
-    margin: 10
+    margin: 10,
+    borderRadius: 20,
+    borderColor: 'grey',
+    borderWidth: 2
   },
+  image: {
+
+  }
 })
 
 export default GalleryView
