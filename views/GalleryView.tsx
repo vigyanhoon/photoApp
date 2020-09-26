@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   Image,
   TouchableOpacity
 } from 'react-native';
@@ -38,6 +39,7 @@ const GalleryView = ({ navigation }) => {
   }
 
   return (
+    <ScrollView>
     <View style={styles.root}>
       {images.map((img, index) => {
         return (
@@ -47,6 +49,7 @@ const GalleryView = ({ navigation }) => {
         )
       })}
     </View>
+    </ScrollView>
   )
 }
 

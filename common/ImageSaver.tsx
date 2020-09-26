@@ -21,9 +21,9 @@ const removePath = async (path: string) => {
   await save(key, paths)
 }
 
-const deleteImage = (path: string) => {
-  removePath(path)
-  deleteFile(path)
+const deleteImage = async (path: string) => {
+  await removePath(path)
+  await deleteFile(path)
 }
 
 export { addFilePaths, getFilePaths, deleteImage }

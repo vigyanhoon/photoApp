@@ -10,7 +10,10 @@ import { deleteImage } from '../common/ImageSaver'
 
 const ImageView = ({ navigation, route: { params: { path } } }) => {
   const deletePressed = () => {
-    deleteImage(path)
+    (async ()=>{
+      await deleteImage(path)
+      navigation.goBack()
+    })()
   }
 
   React.useLayoutEffect(() => {
