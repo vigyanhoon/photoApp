@@ -3,21 +3,25 @@ import {
   StyleSheet,
   View,
   Image,
-} from 'react-native';
+  Button
+} from 'react-native'
 
-var RNFS = require('react-native-fs');
+import { deleteImage } from '../common/ImageSaver'
 
-const ImageView = ({ route: { params: { path } } }) => {
+const ImageView = ({ navigation, route: { params: { path } } }) => {
+  const deletePressed = () => {
+    deleteImage(path)
+  }
 
-  // RNFS.readDir(imagePath)
-  //   .then((result: { path: any; }[]) => {
-  //     console.log('GOT RESULT', result);
-  //     setImages(result)
-  //   })
-  //   .catch((err: { message: any; code: any; }) => {
-  //     console.log(err.message, err.code);
-  //   });
-  console.log('route image path is ' + path)
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={styles.deleteButton}>
+          <Button color={'red'} onPress={deletePressed} title="Delete" />
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <>
@@ -35,6 +39,9 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
+  deleteButton: {
+    marginRight: 20
+  }
 });
 
 export default ImageView

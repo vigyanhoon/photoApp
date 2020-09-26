@@ -12,21 +12,29 @@ import { getFilePaths } from '../common/ImageSaver';
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
 
-const GalleryView = ({navigation}) => {
+const GalleryView = ({ navigation }) => {
   const [images, setImages] = useState([])
 
   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      refreshImages()
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const refreshImages = () => {
     (async () => {
       const paths: string[] = await getFilePaths()
-      console.log('paths in gallery ' + paths)
-      setImages(paths)
+      console.log('fetched paths ' + paths.length)
+        setImages(paths)
     })()
-  }, [])
+  }
 
-  const openImageView = (index:number)=> {
+  const openImageView = (index: number) => {
     console.log('image pressed ' + index)
     const path = images[index]
-    navigation.navigate('Image', {path})
+    navigation.navigate('Image', { path })
   }
 
   return (
@@ -34,7 +42,7 @@ const GalleryView = ({navigation}) => {
       {images.map((img, index) => {
         return (
           <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
-              <Image style={styles.thumb} source={{ uri: img}} />
+            <Image style={styles.thumb} source={{ uri: img }} />
           </TouchableOpacity>
         )
       })}
