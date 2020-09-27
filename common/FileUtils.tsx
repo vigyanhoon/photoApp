@@ -9,7 +9,7 @@ const deleteFile = async (path: string) => {
   const file = await RNFS.stat(path)
 
   RNFS.unlink(file.originalFilepath)
-    .then( () => {
+    .then(() => {
       console.log('File deleted ' + path)
     })
     .catch((err: error) => {
@@ -18,7 +18,7 @@ const deleteFile = async (path: string) => {
 }
 
 const getFiles = (path: string) => {
-  RNFS.readDir(path)
+  return RNFS.readDir(path)
     .then((result: []) => {
       return result
     })
@@ -27,4 +27,11 @@ const getFiles = (path: string) => {
     });
 }
 
-export {deleteFile, getFiles}
+const clearCameraFolder = async () => {
+  let files = await getFiles(RNFS.CachesDirectoryPath + '/Camera')
+  for (let file of files) {
+    await deleteFile(file.path)
+  }
+}
+
+export { deleteFile, getFiles, clearCameraFolder }
