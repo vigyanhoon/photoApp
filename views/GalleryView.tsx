@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,13 +8,16 @@ import {
 } from 'react-native';
 
 import { Dimensions } from 'react-native';
-import { getFilePaths } from '../common/ImageSaver';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../reducers/rootReducer';
+import { getImages } from '../reducers/imageSlice';
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
 
 const GalleryView = ({ navigation }) => {
-  const [images, setImages] = useState([])
+  const { allImages } = useSelector((state: RootState) => state.images)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -25,30 +28,25 @@ const GalleryView = ({ navigation }) => {
   }, [navigation]);
 
   const refreshImages = () => {
-    (async () => {
-      const paths: string[] = await getFilePaths()
-      console.log('fetched paths ' + paths.length)
-        setImages(paths)
-    })()
+    dispatch(getImages())
   }
 
   const openImageView = (index: number) => {
-    console.log('image pressed ' + index)
-    const path = images[index]
-    navigation.navigate('Image', { path })
+    const image = allImages[index]
+    navigation.navigate('Image', { image })
   }
 
   return (
     <ScrollView>
-    <View style={styles.root}>
-      {images.map((img, index) => {
-        return (
-          <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
-            <Image style={styles.thumb} source={{ uri: img }} />
-          </TouchableOpacity>
-        )
-      })}
-    </View>
+      <View style={styles.root}>
+        {allImages.map((img, index) => {
+          return (
+            <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
+              <Image style={styles.thumb} source={{ uri: img.path }} />
+            </TouchableOpacity>
+          )
+        })}
+      </View>
     </ScrollView>
   )
 }

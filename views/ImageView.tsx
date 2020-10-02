@@ -5,13 +5,15 @@ import {
   Image,
   Button
 } from 'react-native'
+import { useDispatch } from 'react-redux';
+import { removeImage } from '../reducers/imageSlice';
 
-import { deleteImage } from '../common/ImageSaver'
-
-const ImageView = ({ navigation, route: { params: { path } } }) => {
+const ImageView = ({ navigation, route: { params: { image } } }) => {
+  const dispatch = useDispatch()
+  
   const deletePressed = () => {
     (async ()=>{
-      await deleteImage(path)
+      await dispatch(removeImage(image))
       navigation.goBack()
     })()
   }
@@ -29,7 +31,7 @@ const ImageView = ({ navigation, route: { params: { path } } }) => {
   return (
     <>
       <View style={styles.body}>
-        <Image style={styles.image} source={{ uri: path }} />
+        <Image style={styles.image} source={{ uri: image.path }} />
       </View>
     </>
   )

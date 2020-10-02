@@ -4,7 +4,7 @@ const save = async (key: string, value: any) => {
   return await AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
-const get = async (key: string): Promise<string[]> => {
+const get = async (key: string): Promise<any[]> => {
   const saved = await AsyncStorage.getItem(key);
   const jsonValue = JSON.parse(saved)
   return jsonValue

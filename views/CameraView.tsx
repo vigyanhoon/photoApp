@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { ImageDetail } from '../common/Interfaces'
 import {
   StyleSheet,
   View,
@@ -6,7 +7,9 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { addMark } from '../common/MarkerUtil';
+
+import { useDispatch } from 'react-redux'
+import { saveImage } from '../reducers/imageSlice';
 
 const PendingView = () => (
   <View
@@ -19,51 +22,51 @@ const PendingView = () => (
   </View>
 );
 
-class CameraView extends PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
-  takePicture = async function (camera: RNCamera) {
+const CameraView = () => {
+  const dispatch = useDispatch()
+  
+  const takePicture = async function (camera: RNCamera) {
     try {
       const options = { quality: 0.5, base64: true };
       const data = await camera.takePictureAsync(options);
-      addMark(data.uri)
+      const detail: ImageDetail = {
+        path: data.uri,
+        name: 'imagename'
+      }
+      dispatch(saveImage(detail))
     }
     catch (e) {
       console.log(e)
     }
   };
 
-  render() {
-    return (
-      <View style={styles.root}>
-        <RNCamera
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          captureAudio={false}
-          androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
-        >
-          {({ camera, status }) => {
-            if (status !== 'READY') return <PendingView />;
-            return (
-              <View style={styles.button}>
-                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-                  <Text style={{ fontSize: 14 }}> SNAP </Text>
-                </TouchableOpacity>
-              </View>
-            );
-          }}
-        </RNCamera>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.root}>
+      <RNCamera
+        style={styles.preview}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.on}
+        captureAudio={false}
+        androidCameraPermissionOptions={{
+          title: 'Permission to use camera',
+          message: 'We need your permission to use your camera',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
+      >
+        {({ camera, status }) => {
+          if (status !== 'READY') return <PendingView />;
+          return (
+            <View style={styles.button}>
+              <TouchableOpacity onPress={() => takePicture(camera)} style={styles.capture}>
+                <Text style={{ fontSize: 14 }}> SNAP </Text>
+              </TouchableOpacity>
+            </View>
+          );
+        }}
+      </RNCamera>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

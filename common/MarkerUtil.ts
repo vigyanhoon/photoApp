@@ -1,6 +1,6 @@
 import Marker from 'react-native-image-marker';
 import { clearCameraFolder } from './FileUtils';
-import { addFilePaths } from './ImageSaver';
+import { addFile } from './ImageSaver';
 
 const addMark = (uri: string) => {
   Marker.markText({
@@ -19,7 +19,7 @@ const addMark = (uri: string) => {
       color: '#ff00ff'
     },
   }).then((res) => {
-    addFilePaths('file://' + res)
+    addFile('file://' + res)
     clearCameraFolder()
   }).catch((err) => {
     console.log(err)
