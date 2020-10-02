@@ -3,16 +3,17 @@ import {
   StyleSheet,
   View,
   Image,
-  Button
+  Button,
+  Text, ImageBackground
 } from 'react-native'
 import { useDispatch } from 'react-redux';
 import { removeImage } from '../reducers/imageSlice';
 
 const ImageView = ({ navigation, route: { params: { image } } }) => {
   const dispatch = useDispatch()
-  
+
   const deletePressed = () => {
-    (async ()=>{
+    (async () => {
       await dispatch(removeImage(image))
       navigation.goBack()
     })()
@@ -31,7 +32,9 @@ const ImageView = ({ navigation, route: { params: { image } } }) => {
   return (
     <>
       <View style={styles.body}>
-        <Image style={styles.image} source={{ uri: image.path }} />
+        <ImageBackground style={styles.image} source={{ uri: image.path }}>
+          <Text style={styles.imageLabel}>{image.name}</Text>
+        </ImageBackground>
       </View>
     </>
   )
@@ -43,9 +46,16 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    justifyContent:'flex-end',
+    alignItems:'center',
   },
   deleteButton: {
     marginRight: 20
+  },
+  imageLabel: {
+    color: 'white',
+    fontSize: 15,
+    margin: 10
   }
 });
 

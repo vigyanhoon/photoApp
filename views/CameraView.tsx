@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { ImageDetail } from '../common/Interfaces'
 import {
   StyleSheet,
@@ -8,40 +8,42 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveImage } from '../reducers/imageSlice';
+import { RootState } from '../reducers/rootReducer';
+import InputModal from './InputModal';
 
 const PendingView = () => (
-  <View
-    style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
+  <View style={styles.pending}>
     <Text style={{ color: 'red' }}>Waiting</Text>
   </View>
 );
 
 const CameraView = () => {
   const dispatch = useDispatch()
-  
+  const { allImages } = useSelector((state: RootState) => state.images)
+  const [showPopup, setShowPopup] = useState(false)
+  const [imageName, setImageName] = useState('')
+  const data = useRef(null)
+
   const takePicture = async function (camera: RNCamera) {
-    try {
-      const options = { quality: 0.5, base64: true };
-      const data = await camera.takePictureAsync(options);
-      const detail: ImageDetail = {
-        path: data.uri,
-        name: 'imagename'
-      }
-      dispatch(saveImage(detail))
-    }
-    catch (e) {
-      console.log(e)
-    }
+    const options = { quality: 0.5, base64: true };
+    const imageData = await camera.takePictureAsync(options);
+    data.current = imageData
+    setShowPopup(true)
   };
+
+  const storeImage = ()=> {
+    const detail: ImageDetail = {
+      path: data.current.uri,
+      name: imageName
+    }
+    dispatch(saveImage(detail))
+  }
 
   return (
     <View style={styles.root}>
+      {showPopup && <InputModal {...{ imageName, setImageName, showPopup, setShowPopup, storeImage, allImages }} />}
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
@@ -52,12 +54,11 @@ const CameraView = () => {
           message: 'We need your permission to use your camera',
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
-        }}
-      >
+        }}>
         {({ camera, status }) => {
           if (status !== 'READY') return <PendingView />;
           return (
-            <View style={styles.button}>
+            <View style={styles.snapButton}>
               <TouchableOpacity onPress={() => takePicture(camera)} style={styles.capture}>
                 <Text style={{ fontSize: 14 }}> SNAP </Text>
               </TouchableOpacity>
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  button: {
+  snapButton: {
     flex: 0,
     height: 100,
     width: 500
@@ -92,6 +93,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 20,
   },
+  pending: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 export default CameraView;
