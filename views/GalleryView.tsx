@@ -21,7 +21,6 @@ const GalleryView = ({ navigation }) => {
   const dispatch = useDispatch()
   const [filterText, setFilterText] = useState('')
   const [showFilterInput, toggleFilterInput] = useState(false)
-  const [filteredImages, setFilteredImages] = useState(allImages)
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,7 +30,7 @@ const GalleryView = ({ navigation }) => {
         </View>
       ),
     });
-  }, [navigation, showFilterInput, allImages,filteredImages]);
+  }, [navigation, showFilterInput, allImages]);
 
   const toggleInput = () => {
     toggleFilterInput(!showFilterInput)
@@ -42,12 +41,10 @@ const GalleryView = ({ navigation }) => {
       refreshImages()
     });
     return unsubscribe;
-  }, [navigation, showFilterInput, allImages,filteredImages]);
+  }, [navigation, showFilterInput, allImages]);
 
   const refreshImages = () => {
-    console.log('refresh images  called')
     dispatch(getImages())
-    setFilteredImages(allImages)
   }
 
   const openImageView = (index: number) => {
@@ -56,18 +53,20 @@ const GalleryView = ({ navigation }) => {
   }
 
   const onChangeText = (text: string) => {
-    console.log(text)
     setFilterText(text)
-    let images = allImages.filter(img=>img.name.includes(filterText))
-    if (text === '') images = allImages
-    setFilteredImages(images)
+  }
+
+  const getFilteredImages = () => {
+    let images = allImages.filter(img => img.name.includes(filterText))
+    if (filterText === '') images = allImages
+    return images
   }
 
   return (
     <ScrollView>
       {showFilterInput && <TextInput maxLength={20} style={styles.filterInput} onChangeText={text => onChangeText(text)} value={filterText} />}
       <View style={styles.root}>
-        {filteredImages.map((img, index) => {
+        {getFilteredImages().map((img, index) => {
           return (
             <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
               <Image style={styles.thumb} source={{ uri: img.path }} />
