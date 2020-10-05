@@ -27,4 +27,4 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
       - name: Upload on server
         run: |
-          scp android/app/build/outputs/apk/release/app-release.apk sanjanjz@sanjaypandey.biz:public_html
+          scp android/app/build/outputs/apk/release/app-release.apk ${{ secrets.DEST }}
