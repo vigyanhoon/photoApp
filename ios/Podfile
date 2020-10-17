@@ -12,6 +12,8 @@ target 'photoApp' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'photoAppTests' do
     inherit! :complete
     # Pods for testing
