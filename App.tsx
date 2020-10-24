@@ -13,9 +13,11 @@ import ImageView from './views/ImageView';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createCameraFolder } from './common/FileUtils';
 
 
 const Stack = createStackNavigator();
+createCameraFolder()
 
 const App: () => React.ReactNode = () => {
   return (
@@ -23,7 +25,7 @@ const App: () => React.ReactNode = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen options={{headerShown: false}} name="Home" component={Home} />
             <Stack.Screen name="Camera" component={CameraView} />
             <Stack.Screen name="Gallery" component={GalleryView} />
             <Stack.Screen name="Image" component={ImageView} />

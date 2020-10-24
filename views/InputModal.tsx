@@ -10,9 +10,18 @@ import {
   View
 } from "react-native";
 
+import { useDispatch, useSelector } from 'react-redux'
+import { ImageDetail } from "../common/Interfaces";
+import { saveImage } from '../reducers/imageSlice';
+import { RootState } from '../reducers/rootReducer';
+
 const windowWidth = Dimensions.get('window').width;
 
-const InputModal = ({ imageName, setImageName, showPopup, setShowPopup, storeImage, allImages }) => {
+const InputModal = ({ showPopup, setShowPopup, url}) => {
+  const dispatch = useDispatch()
+  const { allImages } = useSelector((state: RootState) => state.images)
+  
+  const [imageName, setImageName] = useState('')
   const [error, setError] = useState('')
 
   const closeModal = () => {
@@ -33,6 +42,14 @@ const InputModal = ({ imageName, setImageName, showPopup, setShowPopup, storeIma
 
   const onChangeText = (text: string) => {
     setImageName(text)
+  }
+
+  const storeImage = ()=> {
+    const detail: ImageDetail = {
+      path: url,
+      name: imageName
+    }
+    dispatch(saveImage(detail))
   }
 
   return (

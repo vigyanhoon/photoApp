@@ -5,7 +5,9 @@ interface error {
   code: string
 }
 
-const deleteFile = async (path: string) => {
+export const CAMERA_PATH = 'file:///data/user/0/com.photoapp/cache/Camera/'
+
+export const deleteFile = async (path: string) => {
   const file = await RNFS.stat(path)
 
   RNFS.unlink(file.originalFilepath)
@@ -17,7 +19,7 @@ const deleteFile = async (path: string) => {
     });
 }
 
-const getFiles = (path: string) => {
+export const getFiles = (path: string) => {
   return RNFS.readDir(path)
     .then((result: []) => {
       return result
@@ -27,11 +29,36 @@ const getFiles = (path: string) => {
     });
 }
 
-const clearCameraFolder = async () => {
+export const clearCameraFolder = async () => {
   let files = await getFiles(RNFS.CachesDirectoryPath + '/Camera')
   for (let file of files) {
     await deleteFile(file.path)
   }
 }
 
-export { deleteFile, getFiles, clearCameraFolder }
+const copyFile = (source: string, destination: string) => {
+  return RNFS.copyFile(source, destination)
+    .then(() => {
+      console.log(source + ' copied to ' + destination)
+    })
+    .catch((err: error) => {
+      console.log(err.message, err.code);
+    });
+}
+
+export const copyFileToApp = async (source: string) => {
+  const imageName = source.substring(source.lastIndexOf('/') + 1, source.length)
+  const destination = CAMERA_PATH + imageName
+  await copyFile(source, destination)
+  return destination
+}
+
+export const createCameraFolder = () => {
+  return RNFS.mkdir(CAMERA_PATH)
+    .then(() => {
+      console.log('Path created ' + CAMERA_PATH)
+    })
+    .catch((err: error) => {
+      console.log(err.message, err.code);
+    });
+}

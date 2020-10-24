@@ -8,9 +8,6 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-import { useDispatch, useSelector } from 'react-redux'
-import { saveImage } from '../reducers/imageSlice';
-import { RootState } from '../reducers/rootReducer';
 import InputModal from './InputModal';
 
 const PendingView = () => (
@@ -20,30 +17,19 @@ const PendingView = () => (
 );
 
 const CameraView = () => {
-  const dispatch = useDispatch()
-  const { allImages } = useSelector((state: RootState) => state.images)
   const [showPopup, setShowPopup] = useState(false)
-  const [imageName, setImageName] = useState('')
-  const data = useRef(null)
+  const [url, setURL] = useState('')
 
   const takePicture = async function (camera: RNCamera) {
     const options = { quality: 0.5, base64: true };
     const imageData = await camera.takePictureAsync(options);
-    data.current = imageData
+    setURL(imageData.uri)
     setShowPopup(true)
   };
 
-  const storeImage = ()=> {
-    const detail: ImageDetail = {
-      path: data.current.uri,
-      name: imageName
-    }
-    dispatch(saveImage(detail))
-  }
-
   return (
     <View style={styles.root}>
-      {showPopup && <InputModal {...{ imageName, setImageName, showPopup, setShowPopup, storeImage, allImages }} />}
+      {showPopup && <InputModal {...{ showPopup, setShowPopup, url }} />}
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
