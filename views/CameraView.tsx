@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { ImageDetail } from '../common/Interfaces'
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
