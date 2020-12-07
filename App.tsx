@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
 
 import { Provider } from 'react-redux'
 import { store } from './reducers/store';
@@ -14,9 +11,18 @@ import ImageView from './views/ImageView';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createCameraFolder } from './common/FileUtils';
+import StickerScreen from './views/StickerScreen';
+import { ImageDetail } from './common/Interfaces';
 
+export type RootStackParamList = {
+  Home: undefined;
+  Camera: undefined;
+  Input: { url: string };
+  Gallery: undefined;
+  Image: { image: ImageDetail };
+};
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 createCameraFolder()
 
 const App: () => React.ReactNode = () => {
@@ -25,8 +31,9 @@ const App: () => React.ReactNode = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen options={{headerShown: false}} name="Home" component={Home} />
+            <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen name="Camera" component={CameraView} />
+            <Stack.Screen name="Input" component={StickerScreen} />
             <Stack.Screen name="Gallery" component={GalleryView} />
             <Stack.Screen name="Image" component={ImageView} />
           </Stack.Navigator>
@@ -35,11 +42,5 @@ const App: () => React.ReactNode = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-  },
-});
 
 export default App;

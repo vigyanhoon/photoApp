@@ -11,8 +11,19 @@ import { removeImage } from '../reducers/imageSlice';
 
 import Icon from 'react-native-vector-icons/Feather';
 import Share from "react-native-share";
+import { RootStackParamList } from '../App';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const ImageView = ({ navigation, route: { params: { image } } }) => {
+type RouteProps = RouteProp<RootStackParamList, 'Image'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Image'>;
+
+interface Props {
+  route: RouteProps
+  navigation: NavigationProp
+}
+
+const ImageView = ({ navigation, route: { params: { image } } }: Props) => {
   const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false)
 
@@ -31,17 +42,18 @@ const ImageView = ({ navigation, route: { params: { image } } }) => {
     }
     console.log(options)
     Share.open(options)
-      .then((res) => { setShowMenu(false) })
+      .then(() => { setShowMenu(false) })
       .catch((err) => { err && console.log(err); });
   }
 
   React.useLayoutEffect(() => {
+    const headerRight = () => (
+      <TouchableOpacity style={styles.moreButton} onPress={() => setShowMenu(isOpen => !isOpen)}>
+        <Icon name="more-vertical" size={30} color="#000" />
+      </TouchableOpacity>
+    )
     navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity style={styles.moreButton} onPress={() => setShowMenu(isOpen => !isOpen)}>
-          <Icon name="more-vertical" size={30} color="#000" />
-        </TouchableOpacity>
-      ),
+      headerRight: headerRight,
     });
   }, [navigation]);
 
@@ -58,7 +70,7 @@ const ImageView = ({ navigation, route: { params: { image } } }) => {
 
   return (
     <>
-      <View style={styles.body} onTouchEnd={()=>setShowMenu(false)}>
+      <View style={styles.body} onTouchEnd={() => setShowMenu(false)}>
         <ImageBackground style={styles.image} source={{ uri: image.path }}>
           {showMenu && <Menu />}
           <Text style={styles.imageLabel}>{image.name}</Text>

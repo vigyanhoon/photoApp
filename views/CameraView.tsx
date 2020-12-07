@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -6,8 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-
-import InputModal from './InputModal';
+import { RootStackParamList } from '../App';
 
 const PendingView = () => (
   <View style={styles.pending}>
@@ -15,20 +15,21 @@ const PendingView = () => (
   </View>
 );
 
-const CameraView = () => {
-  const [showPopup, setShowPopup] = useState(false)
-  const [url, setURL] = useState('')
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Camera'>;
 
+interface Props {
+  navigation: NavigationProp
+}
+
+const CameraView = ({ navigation }: Props) => {
   const takePicture = async function (camera: RNCamera) {
     const options = { quality: 0.5, base64: true };
     const imageData = await camera.takePictureAsync(options);
-    setURL(imageData.uri)
-    setShowPopup(true)
+    navigation.navigate('Input', { url: imageData.uri })
   };
 
   return (
     <View style={styles.root}>
-      {showPopup && <InputModal {...{ showPopup, setShowPopup, url }} />}
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}

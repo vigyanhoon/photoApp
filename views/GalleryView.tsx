@@ -12,23 +12,32 @@ import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../reducers/rootReducer';
 import { getImages } from '../reducers/imageSlice';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../App';
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
 
-const GalleryView = ({ navigation }) => {
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Gallery'>;
+
+interface Props {
+  navigation: NavigationProp
+}
+
+const GalleryView = ({ navigation }: Props) => {
   const { allImages } = useSelector((state: RootState) => state.images)
   const dispatch = useDispatch()
   const [filterText, setFilterText] = useState('')
   const [showFilterInput, toggleFilterInput] = useState(false)
 
   React.useLayoutEffect(() => {
+    const filterButton = () => (
+      <View style={styles.filterButton}>
+        <Button color={'green'} onPress={toggleInput} title="Filter" />
+      </View>
+    )
     navigation.setOptions({
-      headerRight: () => (
-        <View style={styles.filterButton}>
-          <Button color={'green'} onPress={toggleInput} title="Filter" />
-        </View>
-      ),
+      headerRight: filterButton,
     });
   }, [navigation, showFilterInput, allImages]);
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -6,13 +7,16 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import { RootStackParamList } from '../App';
 import { copyFileToApp } from '../common/FileUtils';;
-import InputModal from './InputModal';
 
-const Home = ({ navigation }) => {
-  const [showPopup, setShowPopup] = useState(false)
-  const [url, setURL] = useState('')
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
+interface Props {
+  navigation: NavigationProp
+}
+
+const Home = ({ navigation }: Props) => {
   const openGallery = () => {
     ImagePicker.launchImageLibrary({}, (response) => {
       if (response.didCancel) {
@@ -27,10 +31,9 @@ const Home = ({ navigation }) => {
     });
   }
 
-  const copyImage = async (path:string) => {
+  const copyImage = async (path: string) => {
     const savedPath = await copyFileToApp(path)
-    setURL(savedPath)
-    setShowPopup(true)
+    navigation.navigate('Input', { url: savedPath })
   }
 
   const openCamera = () => {
@@ -44,7 +47,6 @@ const Home = ({ navigation }) => {
   return (
     <>
       <View style={styles.body}>
-        {showPopup && <InputModal {...{ showPopup, setShowPopup, url }} />}
         <TouchableOpacity style={styles.button} onPress={openGallery}>
           <Text style={styles.buttonText}>Take From Gallery</Text>
         </TouchableOpacity>
