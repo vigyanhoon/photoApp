@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="photoApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoApp.iml" filepath="$PROJECT_DIR$/.idea/modules/photoApp.iml" group="photoApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1996210536/react-native-camera.iml" filepath="$PROJECT_DIR$/.idea/modules/-1996210536/react-native-camera.iml" group="photoApp/react-native-camera" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/366308391/react-native-community_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/366308391/react-native-community_async-storage.iml" group="photoApp/react-native-community_async-storage" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1609717532/react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/-1609717532/react-native-community_masked-view.iml" group="photoApp/react-native-community_masked-view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1376656960/react-native-fs.iml" filepath="$PROJECT_DIR$/.idea/modules/-1376656960/react-native-fs.iml" group="photoApp/react-native-fs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1017998221/react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-1017998221/react-native-gesture-handler.iml" group="photoApp/react-native-gesture-handler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2078380831/react-native-image-marker.iml" filepath="$PROJECT_DIR$/.idea/modules/2078380831/react-native-image-marker.iml" group="photoApp/react-native-image-marker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/573207411/react-native-image-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/573207411/react-native-image-picker.iml" group="photoApp/react-native-image-picker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1590545865/react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/1590545865/react-native-reanimated.iml" group="photoApp/react-native-reanimated" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1607621660/react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/1607621660/react-native-safe-area-context.iml" group="photoApp/react-native-safe-area-context" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-227479756/react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-227479756/react-native-screens.iml" group="photoApp/react-native-screens" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-10811188/react-native-share.iml" filepath="$PROJECT_DIR$/.idea/modules/-10811188/react-native-share.iml" group="photoApp/react-native-share" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2096492477/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-2096492477/react-native-vector-icons.iml" group="photoApp/react-native-vector-icons" />
+    </modules>
+  </component>
+</project>

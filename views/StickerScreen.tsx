@@ -1,5 +1,5 @@
 import { RouteProp } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   Button,
   Dimensions,
@@ -15,6 +15,9 @@ import { RootStackParamList } from "../App";
 import { ImageDetail } from "../common/Interfaces";
 import { saveImage } from '../reducers/imageSlice';
 import { RootState } from '../reducers/rootReducer';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import DropDown from "../common/components/DropDown";
+import FontList from 'react-native-font-list';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -30,7 +33,17 @@ const StickerScreen = ({ route: { params: { url } } }: Props) => {
 
   const [imageName, setImageName] = useState('')
   const [error, setError] = useState('')
-  console.log('url is ' + url)
+  const [families, setFamilies] = useState<[string] | []>([]);
+  const [fonts, setFonts] = useState([]);
+
+  useEffect(()=>{
+    FontList.get((fontFamilies:[string], installedFonts:[string]) => {
+      setFamilies(fontFamilies)
+      setFonts(installedFonts)
+    });
+  }, [])
+
+
   const closeModal = () => {
     const imageWithSameName = allImages.filter(img => img.name === imageName)
     if (imageWithSameName.length) {
@@ -58,13 +71,34 @@ const StickerScreen = ({ route: { params: { url } } }: Props) => {
     dispatch(saveImage(detail))
   }
 
+  const formatText = () => {
+    console.log("format button pressed")
+  }
+
   return (
     <View style={styles.body}>
       <ImageBackground style={styles.image} source={{ uri: url }}>
         <View style={styles.centeredView}>
           <View style={styles.inputView}>
-            <Text style={styles.modalText}>Enter image name</Text>
+            <Text style={styles.titleLabel}>Enter image name</Text>
             <TextInput maxLength={20} style={styles.inputText} onChangeText={text => onChangeText(text)} value={imageName} />
+            <View style={styles.formatContainer}>
+              <TouchableOpacity style={styles.formatButton}>
+                <Text style={[styles.buttonText, { fontWeight: "bold" }]}>B</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.formatButton}>
+                <Text style={[styles.buttonText, { fontStyle: 'italic' }]}>I</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.formatButton}>
+                <Text style={[styles.buttonText, { textDecorationLine: 'underline' }]}>U</Text>
+              </TouchableOpacity>
+              <View style={styles.picker}>
+                <DropDown
+                  defaultText={'Select font'}
+                  values={fonts}
+                />
+              </View>
+            </View>
             <View style={styles.saveButton}>
               <Button title="Save" onPress={closeModal} />
             </View>
@@ -94,7 +128,6 @@ const styles = StyleSheet.create({
   },
   inputView: {
     margin: 20,
-    width: windowWidth - 50,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -108,13 +141,37 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
-  modalText: {
+  formatContainer: {
+    display: "flex",
+    flexDirection: 'row',
+    marginTop: 30,
+    justifyContent: "center",
+  },
+  formatButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'red',
+    marginHorizontal: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10
+  },
+  picker: {
+    borderRadius: 10,
+    width: 100,
+    height: 50,
+    marginHorizontal: 5
+  },
+  buttonText: {
+    fontSize: 25,
+  },
+  titleLabel: {
     marginBottom: 15,
     textAlign: "center"
   },
   saveButton: {
     width: 100,
-    marginVertical: 20
+    marginVertical: 20,
   },
   inputText: {
     height: 40,
