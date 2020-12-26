@@ -11,10 +11,11 @@ import Button from "../components/Button";
 
 interface Props {
   defaultText: string,
-  values: [string]
+  values: [string],
+  onSelect: (item:string) => void
 }
 
-const DropDown = ({defaultText, values}: Props) => {
+const DropDown = ({defaultText, values, onSelect}: Props) => {
   const [showDropDown, setShowDropDown] = useState(false)
   const [selected, setSelected] = useState(defaultText);
 
@@ -27,12 +28,13 @@ const DropDown = ({defaultText, values}: Props) => {
     setShowDropDown(false)
   }
 
-  const onItemPressed = (item:string) => {
+  const onItemPressed = (item: string) => {
+    onSelect(item)
     hideMenu()
     setSelected(item)
   }
 
-  const renderItem = ({item}:{item:string}) => (
+  const renderItem = ({item}: { item: string }) => (
     <TouchableOpacity onPress={() => onItemPressed(item)} delayPressIn={0} style={styles.item}>
       <Text style={styles.title}>{item}</Text>
     </TouchableOpacity>

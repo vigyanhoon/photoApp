@@ -5,11 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/common/components/Button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/AndikaNewBasic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Anton.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Audiowide.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/HanaleiFill.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Langar.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Lato.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Lobster.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/OpenSans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/OpenSansCondensed.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Redressed.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Roboto.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/SourceSansPro.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/AndikaNewBasic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Anton.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Audiowide.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/HanaleiFill.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Langar.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Lato.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Lobster.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSansCondensed.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Redressed.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/Roboto.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/SourceSansPro.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react-native.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/DropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/DropDown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/photoApp.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/photoApp.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/photoApp/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/photoApp/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/StickerScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,19 +45,27 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <branch-grouping />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1m8ynge17DOuPjc0dD2yrs3fH1e" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.1" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.16" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -39,8 +74,26 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Background" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="C:\Users\vigya\Desktop\projects\photoApp\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vigya\Desktop\projects\photoApp\Assets\Fonts" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -55,6 +108,11 @@
       <workItem from="1608899670005" duration="20000" />
       <workItem from="1608899705312" duration="5405000" />
       <workItem from="1608908362310" duration="5052000" />
+      <workItem from="1608914931971" duration="61000" />
+      <workItem from="1608915007090" duration="4717000" />
+      <workItem from="1608949671641" duration="915000" />
+      <workItem from="1608954794268" duration="2775000" />
+      <workItem from="1608959438790" duration="1600000" />
     </task>
     <servers />
   </component>
@@ -66,12 +124,47 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

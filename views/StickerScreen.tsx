@@ -1,4 +1,4 @@
-import { RouteProp } from "@react-navigation/native";
+import {RouteProp} from "@react-navigation/native";
 import React, {useEffect, useState} from "react";
 import {
   Button,
@@ -10,12 +10,12 @@ import {
   View
 } from "react-native";
 
-import { useDispatch, useSelector } from 'react-redux'
-import { RootStackParamList } from "../App";
-import { ImageDetail } from "../common/Interfaces";
-import { saveImage } from '../reducers/imageSlice';
-import { RootState } from '../reducers/rootReducer';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {useDispatch, useSelector} from 'react-redux'
+import {RootStackParamList} from "../App";
+import {ImageDetail} from "../common/Interfaces";
+import {saveImage} from '../reducers/imageSlice';
+import {RootState} from '../reducers/rootReducer';
+import {TouchableOpacity} from "react-native-gesture-handler";
 import DropDown from "../common/components/DropDown";
 import FontList from 'react-native-font-list';
 
@@ -27,17 +27,21 @@ interface Props {
   route: RouteProps
 }
 
-const StickerScreen = ({ route: { params: { url } } }: Props) => {
+const StickerScreen = ({route: {params: {url}}}: Props) => {
   const dispatch = useDispatch()
-  const { allImages } = useSelector((state: RootState) => state.images)
+  const {allImages} = useSelector((state: RootState) => state.images)
 
   const [imageName, setImageName] = useState('')
   const [error, setError] = useState('')
   const [families, setFamilies] = useState<[string] | []>([]);
   const [fonts, setFonts] = useState([]);
+  const [selectedFont, setSelectedFont] = useState([]);
+  const [bold, setBold] = useState(false)
+  const [italic, setItalic] = useState(false)
+  const [underline, setUnderline] = useState(false)
 
-  useEffect(()=>{
-    FontList.get((fontFamilies:[string], installedFonts:[string]) => {
+  useEffect(() => {
+    FontList.get((fontFamilies: [string], installedFonts: [string]) => {
       setFamilies(fontFamilies)
       setFonts(installedFonts)
     });
@@ -71,44 +75,56 @@ const StickerScreen = ({ route: { params: { url } } }: Props) => {
     dispatch(saveImage(detail))
   }
 
-  const formatText = () => {
-    console.log("format button pressed")
+  const onSelect = (item: string) => {
+    console.log('item selected from sticker ' + item)
   }
 
   return (
     <View style={styles.body}>
-      <ImageBackground style={styles.image} source={{ uri: url }}>
+      <ImageBackground style={styles.image} source={{uri: url}}>
         <View style={styles.centeredView}>
           <View style={styles.inputView}>
             <Text style={styles.titleLabel}>Enter image name</Text>
-            <TextInput maxLength={20} style={styles.inputText} onChangeText={text => onChangeText(text)} value={imageName} />
+            <TextInput maxLength={20} style={styles.inputText} onChangeText={text => onChangeText(text)}
+                       value={imageName}/>
             <View style={styles.formatContainer}>
-              <TouchableOpacity style={styles.formatButton}>
-                <Text style={[styles.buttonText, { fontWeight: "bold" }]}>B</Text>
+              <TouchableOpacity style={styles.formatButton} onPress={()=>setBold(!bold)}>
+                <Text style={[styles.buttonText, {fontWeight: "bold"}]}>B</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.formatButton}>
-                <Text style={[styles.buttonText, { fontStyle: 'italic' }]}>I</Text>
+              <TouchableOpacity style={styles.formatButton} onPress={()=>setItalic(!italic)}>
+                <Text style={[styles.buttonText, {fontStyle: 'italic'}]}>I</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.formatButton}>
-                <Text style={[styles.buttonText, { textDecorationLine: 'underline' }]}>U</Text>
+              <TouchableOpacity style={styles.formatButton} onPress={()=>setUnderline(!underline)}>
+                <Text style={[styles.buttonText, {textDecorationLine: 'underline'}]}>U</Text>
               </TouchableOpacity>
               <View style={styles.picker}>
                 <DropDown
                   defaultText={'Select font'}
                   values={fonts}
+                  onSelect={onSelect}
                 />
               </View>
             </View>
             <View style={styles.saveButton}>
-              <Button title="Save" onPress={closeModal} />
+              <Button title="Save" onPress={closeModal}/>
             </View>
             <Text style={styles.error}>{error}</Text>
           </View>
         </View>
+        <Text style={[styles.floatingText,
+            {fontWeight:bold ? 'bold' : 'normal'},
+            {fontStyle:italic ? 'italic' : 'normal'},
+            {textDecorationLine: underline ? 'underline' : 'none'},
+            {fontFamily:'SourceSansPro'},
+            {fontSize: 50}
+          ]}
+        >
+          hisdfasfasdf
+        </Text>
       </ImageBackground>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   body: {
@@ -182,6 +198,11 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red'
+  },
+  floatingText: {
+    position: 'absolute',
+    bottom: 50,
+    left: 50,
   }
 });
 
