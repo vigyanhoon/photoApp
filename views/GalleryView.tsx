@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Text, Button, TextInput
-} from 'react-native';
-
-import { Dimensions } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../reducers/rootReducer';
-import { getImages } from '../reducers/imageSlice';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../App';
+import React, {useEffect, useState} from 'react';
+import {Button, Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../reducers/rootReducer';
+import {getImages} from '../reducers/imageSlice';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
+import {ImageDetail} from "../common/Interfaces";
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = (windowWidth) / 3 - 3 * 10
@@ -46,10 +38,9 @@ const GalleryView = ({ navigation }: Props) => {
   }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
+    return navigation.addListener('focus', () => {
       refreshImages()
     });
-    return unsubscribe;
   }, [navigation, showFilterInput, allImages]);
 
   const refreshImages = () => {
@@ -66,7 +57,7 @@ const GalleryView = ({ navigation }: Props) => {
   }
 
   const getFilteredImages = () => {
-    let images = allImages.filter(img => img.name.includes(filterText))
+    let images = allImages.filter((img:ImageDetail) => img.name.includes(filterText))
     if (filterText === '') images = allImages
     return images
   }
@@ -75,7 +66,7 @@ const GalleryView = ({ navigation }: Props) => {
     <ScrollView>
       {showFilterInput && <TextInput maxLength={20} style={styles.filterInput} onChangeText={text => onChangeText(text)} value={filterText} />}
       <View style={styles.root}>
-        {getFilteredImages().map((img, index) => {
+        {getFilteredImages().map((img:ImageDetail, index) => {
           return (
             <TouchableOpacity key={index} style={styles.image} onPress={openImageView.bind(this, index)}>
               <Image style={styles.thumb} source={{ uri: img.path }} />

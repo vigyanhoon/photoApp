@@ -17,7 +17,7 @@ import { ImageDetail } from './common/Interfaces';
 export type RootStackParamList = {
   Home: undefined;
   Camera: undefined;
-  Input: { url: string };
+  Sticker: { url: string };
   Gallery: undefined;
   Image: { image: ImageDetail };
 };
@@ -33,7 +33,7 @@ const App: () => React.ReactNode = () => {
           <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen name="Camera" component={CameraView} />
-            <Stack.Screen name="Input" component={StickerScreen} />
+            <Stack.Screen name="Sticker" component={StickerScreen} />
             <Stack.Screen name="Gallery" component={GalleryView} />
             <Stack.Screen name="Image" component={ImageView} />
           </Stack.Navigator>

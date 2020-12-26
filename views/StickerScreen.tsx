@@ -1,8 +1,8 @@
 import {RouteProp} from "@react-navigation/native";
 import React, {useEffect, useRef, useState} from "react";
 import {
-  Button, GestureResponderEvent,
-  ImageBackground,
+  Button, Dimensions, GestureResponderEvent,
+  ImageBackground, PanResponderGestureState,
   StyleSheet,
   Text,
   TextInput,
@@ -18,14 +18,18 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import DropDown from "../common/components/DropDown";
 import Draggable from 'react-native-draggable';
 import ColorPicker from "../common/components/ColorPicker";
+import {StackNavigationProp} from "@react-navigation/stack";
+import Toast from 'react-native-simple-toast';
 
-type RouteProps = RouteProp<RootStackParamList, 'Input'>;
+type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Sticker'>;
 
 interface Props {
-  route: RouteProps
+  route: RouteProps,
+  navigation: NavigationProp
 }
 
-const StickerScreen = ({route: {params: {url}}}: Props) => {
+const StickerScreen = ({navigation, route: {params: {url}}}: Props) => {
   const dispatch = useDispatch()
   const {allImages} = useSelector((state: RootState) => state.images)
 
@@ -63,6 +67,9 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
     }
 
     storeImage()
+
+    navigation.popToTop()
+    Toast.show('Image saved', Toast.LONG);
   }
 
   const onChangeText = (text: string) => {
@@ -90,17 +97,10 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
     setSelectedFont(item)
   }
 
-  const onDragRelease = (event: GestureResponderEvent) => {
-
-    // setTextX(event.nativeEvent.locationX)
-    // setTextY(event.nativeEvent.locationY)
-    draggableRef.current!.measure((_fx, _fy, _width, _height, px, py) => {
-      console.log('X offset to page: ' + px)
-      console.log('Y offset to page: ' + py)
-      setTextX(px)
-      setTextY(py)
-      setTextAboveHalf(py < 400)
-    })
+  const onDragRelease = (_event: GestureResponderEvent, _state: PanResponderGestureState, bounds: { left: number, top: number }) => {
+    setTextX(bounds.left)
+    setTextY(bounds.top)
+    setTextAboveHalf(bounds.top < 400)
   }
 
   return (
@@ -138,7 +138,7 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
                            onChangeText={(text) => setFontSize(Number(text))} value={String(fontSize)}/>
               </View>
               <View style={styles.picker}>
-                <ColorPicker oldColor={'red'} onColorSelected={(color: string) => setTextColor(color)}/>
+                <ColorPicker oldColor={textColor} onColorSelected={(color: string) => setTextColor(color)}/>
               </View>
             </View>
             <View style={styles.saveButton}>
@@ -147,7 +147,7 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
             <Text style={styles.error}>{error}</Text>
           </View>
         </View>
-        <Draggable x={0} y={textY} onDragRelease={onDragRelease}>
+        <Draggable x={50} y={500} onDragRelease={onDragRelease} debug={true}>
           <Text ref={draggableRef} style={[styles.floatingText,
             {fontWeight: bold ? 'bold' : 'normal'},
             {fontStyle: italic ? 'italic' : 'normal'},
@@ -168,11 +168,11 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    minHeight: Math.round(Dimensions.get('window').height)
   },
   image: {
     flex: 1,
-    backgroundColor: 'red',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -240,11 +240,12 @@ const styles = StyleSheet.create({
     color: 'red'
   },
   inputSize: {
-    height: 40,
+    height: 50,
     borderColor: 'gray',
     borderWidth: 1,
     width: 100,
-    textAlign: 'center'
+    textAlign: 'center',
+    borderRadius: 10
   },
   floatingText: {}
 });

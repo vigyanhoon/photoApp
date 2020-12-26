@@ -33,7 +33,7 @@ const Home = ({ navigation }: Props) => {
 
   const copyImage = async (path: string) => {
     const savedPath = await copyFileToApp(path)
-    navigation.navigate('Input', { url: savedPath })
+    navigation.navigate('Sticker', { url: savedPath })
   }
 
   const openCamera = () => {

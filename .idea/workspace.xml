@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/common/components/ColorPicker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/Interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/components/DropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/DropDown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reducers/imageSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/reducers/imageSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/ImageView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/CameraView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/CameraView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/GalleryView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/Home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/StickerScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +48,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Users\vigya\Desktop\projects\photoApp\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -76,7 +75,7 @@
       <workItem from="1608954794268" duration="2775000" />
       <workItem from="1608959438790" duration="1600000" />
       <workItem from="1608974627263" duration="13126000" />
-      <workItem from="1608993324530" duration="1320000" />
+      <workItem from="1608993324530" duration="5881000" />
     </task>
     <servers />
   </component>
