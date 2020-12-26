@@ -1,8 +1,7 @@
 import {RouteProp} from "@react-navigation/native";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
-  Button,
-  Dimensions,
+  Button, GestureResponderEvent,
   ImageBackground,
   StyleSheet,
   Text,
@@ -17,9 +16,8 @@ import {saveImage} from '../reducers/imageSlice';
 import {RootState} from '../reducers/rootReducer';
 import {TouchableOpacity} from "react-native-gesture-handler";
 import DropDown from "../common/components/DropDown";
-import FontList from 'react-native-font-list';
-
-const windowWidth = Dimensions.get('window').width;
+import Draggable from 'react-native-draggable';
+import ColorPicker from "../common/components/ColorPicker";
 
 type RouteProps = RouteProp<RootStackParamList, 'Input'>;
 
@@ -33,23 +31,27 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
 
   const [imageName, setImageName] = useState('')
   const [error, setError] = useState('')
-  const [families, setFamilies] = useState<[string] | []>([]);
-  const [fonts, setFonts] = useState([]);
-  const [selectedFont, setSelectedFont] = useState([]);
+  const [fonts, setFonts] = useState<string[]>([])
+  const [fontSize, setFontSize] = useState(20)
+  const [selectedFont, setSelectedFont] = useState('')
   const [bold, setBold] = useState(false)
   const [italic, setItalic] = useState(false)
   const [underline, setUnderline] = useState(false)
+  const draggableRef = useRef<Text>(null)
+  const [textX, setTextX] = useState<number>(50)
+  const [textY, setTextY] = useState<number>(500)
+  const [textColor, setTextColor] = useState<string>('black')
+  const [textAboveHalf, setTextAboveHalf] = useState(false)
 
   useEffect(() => {
-    FontList.get((fontFamilies: [string], installedFonts: [string]) => {
-      setFamilies(fontFamilies)
-      setFonts(installedFonts)
-    });
+    setFonts(['AndikaNewBasic', 'Anton', 'Audiowide', 'HanaleiFill',
+      'Langar', 'Lato', 'Lobster', 'OpenSans', 'OpenSansCondensed',
+      'Redressed', 'Roboto', 'SourceSansPro'])
   }, [])
 
 
-  const closeModal = () => {
-    const imageWithSameName = allImages.filter(img => img.name === imageName)
+  const beginSavingImage = () => {
+    const imageWithSameName = allImages.filter((img: ImageDetail) => img.name === imageName)
     if (imageWithSameName.length) {
       setError('Image with name ' + imageName + ' already exists')
       return
@@ -70,31 +72,56 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
   const storeImage = () => {
     const detail: ImageDetail = {
       path: url,
-      name: imageName
+      name: imageName,
+      x: textX,
+      y: textY,
+      font: selectedFont,
+      size: fontSize,
+      bold: bold,
+      italic: italic,
+      underline: underline,
+      color: textColor
     }
     dispatch(saveImage(detail))
   }
 
   const onSelect = (item: string) => {
-    console.log('item selected from sticker ' + item)
+    console.log(item)
+    setSelectedFont(item)
+  }
+
+  const onDragRelease = (event: GestureResponderEvent) => {
+
+    // setTextX(event.nativeEvent.locationX)
+    // setTextY(event.nativeEvent.locationY)
+    draggableRef.current!.measure((_fx, _fy, _width, _height, px, py) => {
+      console.log('X offset to page: ' + px)
+      console.log('Y offset to page: ' + py)
+      setTextX(px)
+      setTextY(py)
+      setTextAboveHalf(py < 400)
+    })
   }
 
   return (
     <View style={styles.body}>
       <ImageBackground style={styles.image} source={{uri: url}}>
-        <View style={styles.centeredView}>
+        <View style={[styles.centeredView, {marginTop: textAboveHalf ? 500 : 0}]}>
           <View style={styles.inputView}>
             <Text style={styles.titleLabel}>Enter image name</Text>
-            <TextInput maxLength={20} style={styles.inputText} onChangeText={text => onChangeText(text)}
+            <TextInput maxLength={20} style={styles.inputName} onChangeText={text => onChangeText(text)}
                        value={imageName}/>
             <View style={styles.formatContainer}>
-              <TouchableOpacity style={styles.formatButton} onPress={()=>setBold(!bold)}>
+              <TouchableOpacity style={[styles.formatButton, {backgroundColor: bold ? 'grey' : 'transparent'}]}
+                                onPress={() => setBold(!bold)}>
                 <Text style={[styles.buttonText, {fontWeight: "bold"}]}>B</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.formatButton} onPress={()=>setItalic(!italic)}>
+              <TouchableOpacity style={[styles.formatButton, {backgroundColor: italic ? 'grey' : 'transparent'}]}
+                                onPress={() => setItalic(!italic)}>
                 <Text style={[styles.buttonText, {fontStyle: 'italic'}]}>I</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.formatButton} onPress={()=>setUnderline(!underline)}>
+              <TouchableOpacity style={[styles.formatButton, {backgroundColor: underline ? 'grey' : 'transparent'}]}
+                                onPress={() => setUnderline(!underline)}>
                 <Text style={[styles.buttonText, {textDecorationLine: 'underline'}]}>U</Text>
               </TouchableOpacity>
               <View style={styles.picker}>
@@ -105,25 +132,37 @@ const StickerScreen = ({route: {params: {url}}}: Props) => {
                 />
               </View>
             </View>
+            <View style={styles.formatContainer}>
+              <View style={styles.picker}>
+                <TextInput maxLength={2} keyboardType={'numeric'} style={styles.inputSize}
+                           onChangeText={(text) => setFontSize(Number(text))} value={String(fontSize)}/>
+              </View>
+              <View style={styles.picker}>
+                <ColorPicker oldColor={'red'} onColorSelected={(color: string) => setTextColor(color)}/>
+              </View>
+            </View>
             <View style={styles.saveButton}>
-              <Button title="Save" onPress={closeModal}/>
+              <Button title="Save" onPress={beginSavingImage}/>
             </View>
             <Text style={styles.error}>{error}</Text>
           </View>
         </View>
-        <Text style={[styles.floatingText,
-            {fontWeight:bold ? 'bold' : 'normal'},
-            {fontStyle:italic ? 'italic' : 'normal'},
+        <Draggable x={0} y={textY} onDragRelease={onDragRelease}>
+          <Text ref={draggableRef} style={[styles.floatingText,
+            {fontWeight: bold ? 'bold' : 'normal'},
+            {fontStyle: italic ? 'italic' : 'normal'},
             {textDecorationLine: underline ? 'underline' : 'none'},
-            {fontFamily:'SourceSansPro'},
-            {fontSize: 50}
+            {fontFamily: selectedFont},
+            {fontSize: fontSize},
+            {color: textColor}
           ]}
-        >
-          hisdfasfasdf
-        </Text>
+          >
+            {imageName}
+          </Text>
+        </Draggable>
       </ImageBackground>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -146,7 +185,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -166,11 +205,12 @@ const styles = StyleSheet.create({
   formatButton: {
     width: 50,
     height: 50,
-    backgroundColor: 'red',
     marginHorizontal: 5,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 10,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
   picker: {
     borderRadius: 10,
@@ -189,7 +229,7 @@ const styles = StyleSheet.create({
     width: 100,
     marginVertical: 20,
   },
-  inputText: {
+  inputName: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
@@ -199,11 +239,14 @@ const styles = StyleSheet.create({
   error: {
     color: 'red'
   },
-  floatingText: {
-    position: 'absolute',
-    bottom: 50,
-    left: 50,
-  }
+  inputSize: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: 100,
+    textAlign: 'center'
+  },
+  floatingText: {}
 });
 
 export default StickerScreen;

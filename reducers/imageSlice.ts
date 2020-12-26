@@ -4,10 +4,6 @@ import { AppThunk } from './store'
 import { addFile, deleteImage, getFileDetails } from '../common/ImageSaver'
 import { ImageDetail } from '../common/Interfaces'
 
-interface ImageState {
-  allImages: ImageDetail[]
-}
-
 const initialState = {
   allImages: []
 }

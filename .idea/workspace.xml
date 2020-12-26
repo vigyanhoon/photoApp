@@ -5,38 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/AndikaNewBasic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Anton.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Audiowide.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/HanaleiFill.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Langar.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Lato.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Lobster.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/OpenSans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/OpenSansCondensed.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Redressed.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/Roboto.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/assets/fonts/SourceSansPro.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/AndikaNewBasic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Anton.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Audiowide.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/HanaleiFill.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Langar.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Lato.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Lobster.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSansCondensed.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Redressed.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/Roboto.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/fonts/SourceSansPro.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-native.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/components/ColorPicker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/Interfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/components/DropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/DropDown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/photoApp.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/photoApp.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/photoApp/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/photoApp/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reducers/imageSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/reducers/imageSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/ImageView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/views/StickerScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +39,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="14.15.1" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.14.16" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.4" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -74,26 +49,13 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="C:\Users\vigya\Desktop\projects\photoApp\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vigya\Desktop\projects\photoApp\Assets\Fonts" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -113,6 +75,8 @@
       <workItem from="1608949671641" duration="915000" />
       <workItem from="1608954794268" duration="2775000" />
       <workItem from="1608959438790" duration="1600000" />
+      <workItem from="1608974627263" duration="13126000" />
+      <workItem from="1608993324530" duration="1320000" />
     </task>
     <servers />
   </component>

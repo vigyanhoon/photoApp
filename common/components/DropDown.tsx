@@ -11,7 +11,7 @@ import Button from "../components/Button";
 
 interface Props {
   defaultText: string,
-  values: [string],
+  values: string[],
   onSelect: (item:string) => void
 }
 

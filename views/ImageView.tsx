@@ -73,7 +73,18 @@ const ImageView = ({ navigation, route: { params: { image } } }: Props) => {
       <View style={styles.body} onTouchEnd={() => setShowMenu(false)}>
         <ImageBackground style={styles.image} source={{ uri: image.path }}>
           {showMenu && <Menu />}
-          <Text style={styles.imageLabel}>{image.name}</Text>
+          <Text style={[styles.imageLabel,
+            {fontFamily:image.font},
+            {fontSize:image.size},
+            {left: image.x},
+            {top: image.y},
+            {color: image.color},
+            {fontWeight: image.bold ? 'bold' : 'normal'},
+            {fontStyle: image.italic ? 'italic' : 'normal'},
+            {textDecorationLine: image.underline ? 'underline' : 'none'},
+          ]}>
+            {image.name}
+          </Text>
         </ImageBackground>
       </View>
     </>
@@ -110,9 +121,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   imageLabel: {
-    color: 'white',
-    fontSize: 15,
-    margin: 10
+    position: "absolute"
   }
 });
 
