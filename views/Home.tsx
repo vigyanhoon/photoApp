@@ -8,7 +8,7 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 import { RootStackParamList } from '../App';
-import { copyFileToApp } from '../common/FileUtils';;
+import { copyFileToApp } from '../common/FileUtils';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -25,7 +25,8 @@ const Home = ({ navigation }: Props) => {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
-      } else {
+      } else if(response.path) {
+        // noinspection JSIgnoredPromiseFromCall
         copyImage(response.path)
       }
     });
