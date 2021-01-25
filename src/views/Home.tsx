@@ -2,9 +2,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import ImagePicker from 'react-native-image-picker';
+import {
+  ImagePickerResponse,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 import { RootStackParamList } from '../../App';
 import { copyFileToApp } from '../common/FileUtils';
 
@@ -16,16 +17,16 @@ interface Props {
 
 const Home = ({ navigation }: Props): JSX.Element => {
   const openGallery = () => {
-    ImagePicker.launchImageLibrary({}, (response) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    launchImageLibrary({}, (response: ImagePickerResponse) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else if (response.path) {
+      } else if (response.errorMessage) {
+        console.log('ImagePicker Error: ', response.errorMessage);
+      } else if (response.uri) {
         // noinspection JSIgnoredPromiseFromCall
-        copyImage(response.path);
+        copyImage(response.uri);
       }
     });
   };

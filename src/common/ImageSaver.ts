@@ -4,20 +4,19 @@ import { ImageDetail } from './Interfaces';
 
 const key = 'images';
 
-const addFile = async (detail: ImageDetail) => {
+const addFile = async (detail: ImageDetail): Promise<void> => {
   const details = (await get(key)) || [];
   details.push(detail);
   await save(key, details);
 };
 
 const getFileDetails = async (): Promise<ImageDetail[]> => {
-  const files = (await get(key)) || [];
-  return files;
+  return (await get(key)) || [];
 };
 
-const deleteImage = async (image: ImageDetail) => {
+const deleteImage = async (image: ImageDetail): Promise<void> => {
   let images = (await get(key)) || [];
-  images = images.filter((img) => img.name !== image.name);
+  images = images.filter((img: ImageDetail) => img.name !== image.name);
   await save(key, images);
   await deleteFile(image.path);
 };

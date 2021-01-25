@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamList } from '../../App';
 import { ImageDetail } from '../common/Interfaces';
 import { saveImage } from '../reducers/imageSlice';
@@ -20,6 +19,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import Toast from 'react-native-simple-toast';
 import Button from '../common/components/Button';
 import FormatBox from './FormatBox';
+import { useDispatch, useSelector } from 'react-redux';
 
 type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Sticker'>;
@@ -35,11 +35,9 @@ const StickerScreen = ({
     params: { url },
   },
 }: Props): JSX.Element => {
-  const [imageName, setImageName] = useState('');
-
   const defaultStyle: ImageDetail = {
     path: url,
-    name: imageName,
+    name: '',
     x: 50,
     y: 500,
     font: 'OpenSans',
@@ -49,7 +47,9 @@ const StickerScreen = ({
     underline: false,
     color: 'black',
   };
+
   const dispatch = useDispatch();
+  const [imageName, setImageName] = useState('');
   const { allImages } = useSelector((state: RootState) => state.images);
   const [error, setError] = useState('');
   const [detail, setDetail] = useState<ImageDetail>(defaultStyle);
@@ -77,7 +77,7 @@ const StickerScreen = ({
     navigation.setOptions({
       headerRight: headerRight,
     });
-  }, [navigation, imageName, showFormat]);
+  });
 
   const toggleFormatBox = () => {
     setShowFormat(!showFormat);
@@ -104,6 +104,7 @@ const StickerScreen = ({
   };
 
   const storeImage = () => {
+    console.log('in storeimage', detail);
     dispatch(saveImage(detail));
   };
 
@@ -113,15 +114,16 @@ const StickerScreen = ({
   };
 
   const onDetailChange = (dt: ImageDetail | null) => {
-    console.log('details from parent ', dt);
+    if (dt === null) return;
+
     const style = [
       styles.floatingText,
-      { fontWeight: detail.bold ? 'bold' : 'normal' },
-      { fontStyle: detail.italic ? 'italic' : 'normal' },
-      { textDecorationLine: detail.underline ? 'underline' : 'none' },
-      { fontFamily: detail.font },
-      { fontSize: detail.size },
-      { color: detail.color },
+      { fontWeight: dt.bold ? 'bold' : 'normal' },
+      { fontStyle: dt.italic ? 'italic' : 'normal' },
+      { textDecorationLine: dt.underline ? 'underline' : 'none' },
+      { fontFamily: dt.font },
+      { fontSize: dt.size },
+      { color: dt.color },
     ];
     setTextStyle(style);
   };

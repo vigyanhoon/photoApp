@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ImageDetail } from '../common/Interfaces';
@@ -8,18 +8,21 @@ import ColorPicker from '../common/components/ColorPicker';
 interface Props {
   showFormat: boolean;
   imageName: string;
-  setImageName: any;
+  setImageName: Dispatch<SetStateAction<string>>;
   detail: ImageDetail;
   setDetail: any;
-  onDetailChange: (detail: ImageDetail | null) => void;
+  onDetailChange: (detail: ImageDetail) => void;
   error: string;
 }
 
 enum TYPE {
+  TEXT,
   BOLD,
   ITALIC,
   UNDERLINE,
   FONT,
+  SIZE,
+  COLOR,
 }
 
 const FormatBox = ({
@@ -52,13 +55,14 @@ const FormatBox = ({
     ]);
   }, []);
 
-  const onChangeText = (text: string) => {
-    setImageName(text);
-  };
+  const updateDetail = (type: TYPE, value = '') => {
+    let update: ImageDetail = { ...detail };
 
-  const updateDetail = (type: TYPE, selection = '') => {
-    let update: ImageDetail | null;
     switch (type) {
+      case TYPE.TEXT:
+        update = { ...detail, name: value };
+        setImageName(value);
+        break;
       case TYPE.BOLD:
         update = { ...detail, bold: !detail.bold };
         break;
@@ -69,12 +73,18 @@ const FormatBox = ({
         update = { ...detail, underline: !detail.underline };
         break;
       case TYPE.FONT:
-        update = { ...detail, font: selection };
+        update = { ...detail, font: value };
         break;
-      default:
-        update = null;
+      case TYPE.SIZE:
+        update = { ...detail, size: Number(value) };
+        setFontSize(Number(value));
+        break;
+      case TYPE.COLOR:
+        update = { ...detail, color: value };
+        setTextColor(value);
         break;
     }
+    console.log('in update detail', update);
     setDetail(update);
     onDetailChange(update);
   };
@@ -88,7 +98,7 @@ const FormatBox = ({
         <TextInput
           maxLength={20}
           style={styles.inputName}
-          onChangeText={onChangeText}
+          onChangeText={(text) => updateDetail(TYPE.TEXT, text)}
           value={imageName}
         />
         <View style={styles.formatContainer}>
@@ -133,14 +143,16 @@ const FormatBox = ({
               maxLength={2}
               keyboardType="numeric"
               style={styles.inputSize}
-              onChangeText={(text) => setFontSize(Number(text))}
+              onChangeText={(text) => updateDetail(TYPE.SIZE, text)}
               value={String(fontSize)}
             />
           </View>
           <View style={styles.picker}>
             <ColorPicker
               oldColor={textColor}
-              onColorSelected={(color: string) => setTextColor(color)}
+              onColorSelected={(color: string) =>
+                updateDetail(TYPE.COLOR, color)
+              }
             />
           </View>
         </View>

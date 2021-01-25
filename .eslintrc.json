@@ -32,6 +32,7 @@
         "@typescript-eslint",
         "react-native"
     ],
+    "ignorePatterns": ["src/common/MarkerUtil.ts"],
     "rules": {
         "react-native/no-unused-styles": 2,
         "react-native/no-inline-styles": 0,

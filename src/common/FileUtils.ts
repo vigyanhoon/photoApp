@@ -1,3 +1,5 @@
+import { ReadDirItem } from 'react-native-fs';
+
 const RNFS = require('react-native-fs');
 
 interface error {
@@ -7,7 +9,7 @@ interface error {
 
 export const CAMERA_PATH = 'file:///data/user/0/com.photoapp/cache/Camera/';
 
-export const deleteFile = async (path: string) => {
+export const deleteFile = async (path: string): Promise<void> => {
   const file = await RNFS.stat(path);
 
   RNFS.unlink(file.originalFilepath)
@@ -19,9 +21,9 @@ export const deleteFile = async (path: string) => {
     });
 };
 
-export const getFiles = (path: string) => {
+export const getFiles = (path: string): ReadDirItem[] => {
   return RNFS.readDir(path)
-    .then((result: []) => {
+    .then((result: ReadDirItem[]) => {
       return result;
     })
     .catch((err: error) => {
@@ -29,8 +31,11 @@ export const getFiles = (path: string) => {
     });
 };
 
-export const clearCameraFolder = async () => {
-  const files = await getFiles(RNFS.CachesDirectoryPath + '/Camera');
+export const clearCameraFolder = async (): Promise<void> => {
+  const files: ReadDirItem[] = await getFiles(
+    RNFS.CachesDirectoryPath + '/Camera',
+  );
+
   for (const file of files) {
     await deleteFile(file.path);
   }
@@ -46,7 +51,7 @@ const copyFile = (source: string, destination: string) => {
     });
 };
 
-export const copyFileToApp = async (source: string) => {
+export const copyFileToApp = async (source: string): Promise<string> => {
   const imageName = source.substring(
     source.lastIndexOf('/') + 1,
     source.length,
@@ -56,7 +61,7 @@ export const copyFileToApp = async (source: string) => {
   return destination;
 };
 
-export const createCameraFolder = () => {
+export const createCameraFolder = (): Promise<void> => {
   return RNFS.mkdir(CAMERA_PATH)
     .then(() => {
       console.log('Path created ' + CAMERA_PATH);
