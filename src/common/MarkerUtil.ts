@@ -16,15 +16,16 @@ const addMark = (uri: string) => {
       dx: 10.5,
       dy: 20.8,
       radius: 20.9,
-      color: '#ff00ff'
+      color: '#ff00ff',
     },
-  }).then((res) => {
-    addFile('file://' + res)
-    clearCameraFolder()
-  }).catch((err) => {
-    console.log(err)
   })
-}
+    .then((res) => {
+      addFile('file://' + res);
+      clearCameraFolder();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-export { addMark }
-
+export { addMark };

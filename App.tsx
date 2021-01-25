@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { Provider } from 'react-redux'
-import { store } from './reducers/store';
+import { store } from './src/reducers/store';
 
-import Home from './views/Home'
-import CameraView from './views/CameraView';
-import GalleryView from './views/GalleryView';
-import ImageView from './views/ImageView';
+import Home from './src/views/Home'
+import CameraView from './src/views/CameraView';
+import GalleryView from './src/views/GalleryView';
+import ImageView from './src/views/ImageView';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createCameraFolder } from './common/FileUtils';
-import StickerScreen from './views/StickerScreen';
-import { ImageDetail } from './common/Interfaces';
+import { createCameraFolder } from './src/common/FileUtils';
+import StickerScreen from './src/views/StickerScreen';
+import { ImageDetail } from './src/common/Interfaces';
 
 export type RootStackParamList = {
   Home: undefined;

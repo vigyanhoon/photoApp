@@ -46,7 +46,7 @@
     // Report errors for fallthrough cases in switch statement
   },
   "include": [
-    "src/**/*"
+    "./src/**/*",
     // *** The files TypeScript should type check ***
   ]
 }

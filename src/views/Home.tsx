@@ -1,22 +1,20 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import ImagePicker from 'react-native-image-picker';
-import { RootStackParamList } from '../App';
+import { RootStackParamList } from '../../App';
 import { copyFileToApp } from '../common/FileUtils';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 interface Props {
-  navigation: NavigationProp
+  navigation: NavigationProp;
 }
 
-const Home = ({ navigation }: Props) => {
+const Home = ({ navigation }: Props): JSX.Element => {
   const openGallery = () => {
     ImagePicker.launchImageLibrary({}, (response) => {
       if (response.didCancel) {
@@ -25,25 +23,25 @@ const Home = ({ navigation }: Props) => {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
-      } else if(response.path) {
+      } else if (response.path) {
         // noinspection JSIgnoredPromiseFromCall
-        copyImage(response.path)
+        copyImage(response.path);
       }
     });
-  }
+  };
 
   const copyImage = async (path: string) => {
-    const savedPath = await copyFileToApp(path)
-    navigation.navigate('Sticker', { url: savedPath })
-  }
+    const savedPath = await copyFileToApp(path);
+    navigation.navigate('Sticker', { url: savedPath });
+  };
 
   const openCamera = () => {
-    navigation.navigate('Camera')
-  }
+    navigation.navigate('Camera');
+  };
 
   const openSaved = () => {
-    navigation.navigate('Gallery')
-  }
+    navigation.navigate('Gallery');
+  };
 
   return (
     <>
@@ -59,14 +57,14 @@ const Home = ({ navigation }: Props) => {
         </TouchableOpacity>
       </View>
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     margin: 10,
@@ -76,12 +74,10 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     borderRadius: 20,
     borderWidth: 2,
-    justifyContent: "center",
-    alignItems: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttonText: {
-
-  }
+  buttonText: {},
 });
 
-export default Home
+export default Home;

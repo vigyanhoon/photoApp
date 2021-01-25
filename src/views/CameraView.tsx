@@ -1,13 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { RootStackParamList } from '../App';
+import { RootStackParamList } from '../../App';
 
 const PendingView = () => (
   <View style={styles.pending}>
@@ -18,14 +13,14 @@ const PendingView = () => (
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Camera'>;
 
 interface Props {
-  navigation: NavigationProp
+  navigation: NavigationProp;
 }
 
-const CameraView = ({ navigation }: Props) => {
+const CameraView = ({ navigation }: Props): JSX.Element => {
   const takePicture = async function (camera: RNCamera) {
     const options = { quality: 0.5, base64: true };
     const imageData = await camera.takePictureAsync(options);
-    navigation.navigate('Sticker', { url: imageData.uri })
+    navigation.navigate('Sticker', { url: imageData.uri });
   };
 
   return (
@@ -45,7 +40,9 @@ const CameraView = ({ navigation }: Props) => {
           if (status !== 'READY') return <PendingView />;
           return (
             <View style={styles.snapButton}>
-              <TouchableOpacity onPress={() => takePicture(camera)} style={styles.capture}>
+              <TouchableOpacity
+                onPress={() => takePicture(camera)}
+                style={styles.capture}>
                 <Text style={{ fontSize: 14 }}> SNAP </Text>
               </TouchableOpacity>
             </View>
@@ -54,7 +51,7 @@ const CameraView = ({ navigation }: Props) => {
       </RNCamera>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   root: {
@@ -63,7 +60,7 @@ const styles = StyleSheet.create({
   snapButton: {
     flex: 0,
     height: 100,
-    width: 500
+    width: 500,
   },
   preview: {
     flex: 1,
@@ -83,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 
 export default CameraView;

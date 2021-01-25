@@ -1,0 +1,42 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+//        "airbnb-typescript",
+//        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/react",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json",
+        "createDefaultProgram": true
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "react-native"
+    ],
+    "rules": {
+        "react-native/no-unused-styles": 2,
+        "react-native/no-inline-styles": 0,
+        "react-native/no-color-literals": 0,
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }]
+    }
+}
