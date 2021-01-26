@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { store } from './src/reducers/store';
 
-import Home from './src/views/Home'
+import Home from './src/views/Home';
 import CameraView from './src/views/CameraView';
 import GalleryView from './src/views/GalleryView';
 import ImageView from './src/views/ImageView';
@@ -23,7 +23,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-createCameraFolder()
+createCameraFolder();
 
 const App: () => React.ReactNode = () => {
   return (
@@ -31,7 +31,11 @@ const App: () => React.ReactNode = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
             <Stack.Screen name="Camera" component={CameraView} />
             <Stack.Screen name="Sticker" component={StickerScreen} />
             <Stack.Screen name="Gallery" component={GalleryView} />

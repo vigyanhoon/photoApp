@@ -10,7 +10,7 @@ interface Props {
   imageName: string;
   setImageName: Dispatch<SetStateAction<string>>;
   detail: ImageDetail;
-  setDetail: any;
+  setDetail: Dispatch<SetStateAction<ImageDetail>>;
   onDetailChange: (detail: ImageDetail) => void;
   error: string;
 }
@@ -46,7 +46,6 @@ const FormatBox = ({
       'HanaleiFill',
       'Langar',
       'Lato',
-      'Lobster',
       'OpenSans',
       'OpenSansCondensed',
       'Redressed',
@@ -84,7 +83,6 @@ const FormatBox = ({
         setTextColor(value);
         break;
     }
-    console.log('in update detail', update);
     setDetail(update);
     onDetailChange(update);
   };

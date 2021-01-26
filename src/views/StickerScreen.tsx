@@ -1,5 +1,5 @@
 import { RouteProp } from '@react-navigation/native';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   GestureResponderEvent,
@@ -12,7 +12,7 @@ import {
 
 import { RootStackParamList } from '../../App';
 import { ImageDetail } from '../common/Interfaces';
-import { saveImage } from '../reducers/imageSlice';
+import { removeImage, saveImage } from '../reducers/imageSlice';
 import { RootState } from '../reducers/rootReducer';
 import Draggable from 'react-native-draggable';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -56,6 +56,7 @@ const StickerScreen = ({
   const draggableRef = useRef<Text>(null);
   const [showFormat, setShowFormat] = useState(true);
   const [textStyle, setTextStyle] = useState({});
+  const savePressed = useRef(false);
 
   useLayoutEffect(() => {
     const headerRight = () => (
@@ -79,11 +80,21 @@ const StickerScreen = ({
     });
   });
 
+  useEffect(() => {
+    return navigation.addListener('blur', () => {
+      if (!savePressed.current) {
+        console.log('back pressed going to delete');
+        dispatch(removeImage(detail));
+      }
+    });
+  }, [navigation]);
+
   const toggleFormatBox = () => {
     setShowFormat(!showFormat);
   };
 
   const beginSavingImage = () => {
+    savePressed.current = true;
     const imageWithSameName = allImages.filter(
       (img: ImageDetail) => img.name === imageName,
     );
@@ -104,12 +115,10 @@ const StickerScreen = ({
   };
 
   const storeImage = () => {
-    console.log('in storeimage', detail);
     dispatch(saveImage(detail));
   };
 
   const onDrag = () => {
-    console.log('press started');
     if (showFormat) setShowFormat(false);
   };
 
@@ -133,7 +142,6 @@ const StickerScreen = ({
     _state: PanResponderGestureState,
     bounds: { left: number; top: number },
   ) => {
-    console.log('release pressed');
     const updated = { ...detail, x: bounds.left, y: bounds.top };
     setDetail(updated);
   };
