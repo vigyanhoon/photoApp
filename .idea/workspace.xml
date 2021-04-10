@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/photoapp/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/photoapp/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/photoApp/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/photoApp/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/FileUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/FileUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GalleryView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ImageView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -123,7 +115,7 @@
       <workItem from="1611678253302" duration="6078000" />
       <workItem from="1618049206668" duration="32000" />
       <workItem from="1618049246396" duration="160000" />
-      <workItem from="1618049418757" duration="8052000" />
+      <workItem from="1618049418757" duration="9539000" />
     </task>
     <servers />
   </component>

@@ -16,6 +16,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootState } from '../reducers/rootReducer';
 import { ImageDetail } from '../common/Interfaces';
 import { IconButton } from 'react-native-paper';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 type RouteProps = RouteProp<RootStackParamList, 'Image'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Image'>;
@@ -91,6 +92,17 @@ const ImageView = ({
     });
   }, [navigation]);
 
+  const onSwipe = (gestureName: string) => {
+    switch (gestureName) {
+      case 'SWIPE_LEFT':
+        showNext();
+        break;
+      case 'SWIPE_RIGHT':
+        showPrevious();
+        break;
+    }
+  };
+
   const Menu = () => {
     return (
       <View style={styles.menuContainer}>
@@ -105,7 +117,9 @@ const ImageView = ({
   };
 
   return (
-    <>
+    <GestureRecognizer
+      style={styles.body}
+      onSwipe={(direction) => onSwipe(direction)}>
       <View style={styles.body} onTouchEnd={() => setShowMenu(false)}>
         <ImageBackground
           style={styles.image}
@@ -143,7 +157,7 @@ const ImageView = ({
           />
         </ImageBackground>
       </View>
-    </>
+    </GestureRecognizer>
   );
 };
 
