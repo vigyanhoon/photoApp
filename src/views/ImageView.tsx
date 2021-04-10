@@ -15,7 +15,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootState } from '../reducers/rootReducer';
 import { ImageDetail } from '../common/Interfaces';
-import { IconButton } from 'react-native-paper';
+import { Divider, IconButton, Menu } from 'react-native-paper';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 type RouteProps = RouteProp<RootStackParamList, 'Image'>;
@@ -103,15 +103,12 @@ const ImageView = ({
     }
   };
 
-  const Menu = () => {
+  const RightMenu = () => {
     return (
       <View style={styles.menuContainer}>
-        <TouchableOpacity onPress={deletePressed}>
-          <Text style={styles.menuItem}>Delete</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={sharePressed}>
-          <Text style={styles.menuItem}>Share</Text>
-        </TouchableOpacity>
+        <Menu.Item icon="delete" onPress={deletePressed} title="Delete" />
+        <Divider />
+        <Menu.Item icon="share" onPress={sharePressed} title="Share" />
       </View>
     );
   };
@@ -124,7 +121,7 @@ const ImageView = ({
         <ImageBackground
           style={styles.image}
           source={{ uri: currentImage.path }}>
-          {showMenu && <Menu />}
+          {showMenu && <RightMenu />}
           <Text
             style={[
               styles.imageLabel,
@@ -181,15 +178,8 @@ const styles = StyleSheet.create({
   menuContainer: {
     backgroundColor: 'white',
     position: 'absolute',
-    alignSelf: 'flex-end',
     top: 0,
-  },
-  menuItem: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    fontSize: 25,
-    borderColor: 'black',
-    borderWidth: 1,
+    right: 0,
   },
   imageLabel: {
     position: 'absolute',
