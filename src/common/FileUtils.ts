@@ -61,8 +61,8 @@ export const copyFileToApp = async (source: string): Promise<string> => {
   return destination;
 };
 
-export const createCameraFolder = (): Promise<void> => {
-  return RNFS.mkdir(CAMERA_PATH)
+export const createCameraFolder = (): void => {
+  RNFS.mkdir(CAMERA_PATH)
     .then(() => {
       console.log('Path created ' + CAMERA_PATH);
     })

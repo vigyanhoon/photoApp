@@ -12,14 +12,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createCameraFolder } from './src/common/FileUtils';
 import StickerScreen from './src/views/StickerScreen';
-import { ImageDetail } from './src/common/Interfaces';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 export type RootStackParamList = {
   Home: undefined;
   Camera: undefined;
   Sticker: { url: string };
   Gallery: undefined;
-  Image: { image: ImageDetail };
+  Image: { index: number };
+};
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#347CFF',
+    error: 'red',
+  },
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -29,19 +39,21 @@ const App: () => React.ReactNode = () => {
   return (
     <>
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Home"
-              component={Home}
-            />
-            <Stack.Screen name="Camera" component={CameraView} />
-            <Stack.Screen name="Sticker" component={StickerScreen} />
-            <Stack.Screen name="Gallery" component={GalleryView} />
-            <Stack.Screen name="Image" component={ImageView} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="Home"
+                component={Home}
+              />
+              <Stack.Screen name="Camera" component={CameraView} />
+              <Stack.Screen name="Sticker" component={StickerScreen} />
+              <Stack.Screen name="Gallery" component={GalleryView} />
+              <Stack.Screen name="Image" component={ImageView} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
       </Provider>
     </>
   );

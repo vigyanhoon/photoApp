@@ -26,7 +26,7 @@ interface Props {
   navigation: NavigationProp;
 }
 
-const GalleryView = ({ navigation }: Props) => {
+const GalleryView = ({ navigation }: Props): JSX.Element => {
   const { allImages } = useSelector((state: RootState) => state.images);
   const dispatch = useDispatch();
   const [filterText, setFilterText] = useState('');
@@ -58,8 +58,7 @@ const GalleryView = ({ navigation }: Props) => {
   };
 
   const openImageView = (index: number) => {
-    const image = allImages[index];
-    navigation.navigate('Image', { image });
+    navigation.navigate('Image', { index });
   };
 
   const onChangeText = (text: string) => {
@@ -101,6 +100,7 @@ const GalleryView = ({ navigation }: Props) => {
   );
 };
 
+// noinspection JSSuspiciousNameCombination
 const styles = StyleSheet.create({
   root: {
     flex: 1,

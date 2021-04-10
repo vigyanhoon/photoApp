@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,14 +6,16 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeImage } from '../reducers/imageSlice';
 
-import Icon from 'react-native-vector-icons/Feather';
 import Share from 'react-native-share';
 import { RootStackParamList } from '../../App';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RootState } from '../reducers/rootReducer';
+import { ImageDetail } from '../common/Interfaces';
+import { IconButton } from 'react-native-paper';
 
 type RouteProps = RouteProp<RootStackParamList, 'Image'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Image'>;
@@ -26,26 +28,45 @@ interface Props {
 const ImageView = ({
   navigation,
   route: {
-    params: { image },
+    params: { index },
   },
 }: Props): JSX.Element => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const { allImages } = useSelector((state: RootState) => state.images);
+  const [currentIndex, setCurrentIndex] = useState(index);
+  const [currentImage, setCurrentImage] = useState<ImageDetail>(
+    allImages[currentIndex],
+  );
+
+  useEffect(() => {
+    setCurrentImage(allImages[currentIndex]);
+  }, [currentIndex]);
 
   const deletePressed = () => {
     (async () => {
-      await dispatch(removeImage(image));
+      await dispatch(removeImage(currentImage));
       navigation.goBack();
     })();
   };
 
+  const showPrevious = () => {
+    if (currentIndex !== 0) setCurrentIndex(currentIndex - 1);
+  };
+
+  const showNext = () => {
+    if (currentIndex !== allImages.length - 1)
+      setCurrentIndex(currentIndex + 1);
+  };
+
   const sharePressed = () => {
+    console.log(currentImage);
     const options = {
       title: 'Share title',
-      message: image.name,
-      url: image.path,
+      message: currentImage.name,
+      url: currentImage.path,
     };
-    console.log(options);
+
     Share.open(options)
       .then(() => {
         setShowMenu(false);
@@ -57,10 +78,12 @@ const ImageView = ({
 
   React.useLayoutEffect(() => {
     const headerRight = () => (
-      <TouchableOpacity
-        style={styles.moreButton}
-        onPress={() => setShowMenu((isOpen) => !isOpen)}>
-        <Icon name="more-vertical" size={30} color="#000" />
+      <TouchableOpacity style={styles.moreButton}>
+        <IconButton
+          icon="dots-vertical"
+          size={30}
+          onPress={() => setShowMenu((isOpen) => !isOpen)}
+        />
       </TouchableOpacity>
     );
     navigation.setOptions({
@@ -84,22 +107,40 @@ const ImageView = ({
   return (
     <>
       <View style={styles.body} onTouchEnd={() => setShowMenu(false)}>
-        <ImageBackground style={styles.image} source={{ uri: image.path }}>
+        <ImageBackground
+          style={styles.image}
+          source={{ uri: currentImage.path }}>
           {showMenu && <Menu />}
           <Text
             style={[
               styles.imageLabel,
-              { fontFamily: image.font },
-              { fontSize: image.size },
-              { left: image.x },
-              { top: image.y },
-              { color: image.color },
-              { fontWeight: image.bold ? 'bold' : 'normal' },
-              { fontStyle: image.italic ? 'italic' : 'normal' },
-              { textDecorationLine: image.underline ? 'underline' : 'none' },
+              { fontFamily: currentImage.font },
+              { fontSize: currentImage.size },
+              { left: currentImage.x },
+              { top: currentImage.y },
+              { color: currentImage.color },
+              { fontWeight: currentImage.bold ? 'bold' : 'normal' },
+              { fontStyle: currentImage.italic ? 'italic' : 'normal' },
+              {
+                textDecorationLine: currentImage.underline
+                  ? 'underline'
+                  : 'none',
+              },
             ]}>
-            {image.name}
+            {currentImage.name}
           </Text>
+          <IconButton
+            icon="arrow-left-bold"
+            size={50}
+            onPress={showPrevious}
+            style={styles.leftButton}
+          />
+          <IconButton
+            icon="arrow-right-bold"
+            size={50}
+            onPress={showNext}
+            style={styles.rightButton}
+          />
         </ImageBackground>
       </View>
     </>
@@ -113,8 +154,9 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'flex-end',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   moreButton: {
     height: 50,
@@ -137,6 +179,12 @@ const styles = StyleSheet.create({
   },
   imageLabel: {
     position: 'absolute',
+  },
+  leftButton: {
+    // alignSelf: 'flex-start',
+  },
+  rightButton: {
+    // alignSelf: 'flex-end',
   },
 });
 
