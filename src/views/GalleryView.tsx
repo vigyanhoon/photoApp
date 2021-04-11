@@ -15,7 +15,7 @@ import { RootState } from '../reducers/rootReducer';
 import { getImages } from '../reducers/imageSlice';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../App';
-import { ImageDetail } from '../common/Interfaces';
+import { PhotoDetail } from '../common/Interfaces';
 
 const windowWidth = Dimensions.get('window').width;
 const thumbWidth = windowWidth / 3 - 3 * 10;
@@ -66,7 +66,7 @@ const GalleryView = ({ navigation }: Props): JSX.Element => {
   };
 
   const getFilteredImages = () => {
-    let images = allImages.filter((img: ImageDetail) =>
+    let images = allImages.filter((img: PhotoDetail) =>
       img.name.includes(filterText),
     );
     if (filterText === '') images = allImages;
@@ -84,7 +84,7 @@ const GalleryView = ({ navigation }: Props): JSX.Element => {
         />
       )}
       <View style={styles.root}>
-        {getFilteredImages().map((img: ImageDetail, index) => {
+        {getFilteredImages().map((img: PhotoDetail, index) => {
           return (
             <TouchableOpacity
               key={index}

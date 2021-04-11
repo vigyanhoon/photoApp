@@ -14,7 +14,7 @@ import { RootStackParamList } from '../../App';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootState } from '../reducers/rootReducer';
-import { ImageDetail } from '../common/Interfaces';
+import { PhotoDetail } from '../common/Interfaces';
 import { Divider, IconButton, Menu } from 'react-native-paper';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
@@ -36,7 +36,7 @@ const ImageView = ({
   const [showMenu, setShowMenu] = useState(false);
   const { allImages } = useSelector((state: RootState) => state.images);
   const [currentIndex, setCurrentIndex] = useState(index);
-  const [currentImage, setCurrentImage] = useState<ImageDetail>(
+  const [currentImage, setCurrentImage] = useState<PhotoDetail>(
     allImages[currentIndex],
   );
 

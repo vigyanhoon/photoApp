@@ -41,7 +41,10 @@ export const clearCameraFolder = async (): Promise<void> => {
   }
 };
 
-const copyFile = (source: string, destination: string) => {
+export const copyFile = (
+  source: string,
+  destination: string,
+): Promise<void> => {
   return RNFS.copyFile(source, destination)
     .then(() => {
       console.log(source + ' copied to ' + destination);

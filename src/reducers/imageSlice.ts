@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppThunk } from './store';
 
-import { addFile, deleteImage, getFileDetails } from '../common/ImageSaver';
-import { ImageDetail } from '../common/Interfaces';
+import {
+  addPhotoToAS,
+  deletePhoto,
+  deletePhotoFromAS,
+  getPhotoDetailsFromAS,
+} from '../common/PhotoHelper';
+import { PhotoDetail } from '../common/Interfaces';
 
 const initialState = {
-  allImages: [],
+  allImages: [] as PhotoDetail[],
 };
 
 const imageSlice = createSlice({
@@ -21,19 +26,19 @@ const imageSlice = createSlice({
   },
 });
 
-export const saveImage = (img: ImageDetail): AppThunk => async (dispatch) => {
-  await addFile(img);
+export const saveImage = (img: PhotoDetail): AppThunk => async (dispatch) => {
+  await addPhotoToAS(img);
   dispatch(addImage(img));
 };
 
 export const getImages = (): AppThunk => async (dispatch) => {
-  const files: ImageDetail[] = await getFileDetails();
-  console.log('fetched paths ' + files.length);
+  const files: PhotoDetail[] = await getPhotoDetailsFromAS();
   dispatch(setImages(files));
 };
 
-export const removeImage = (img: ImageDetail): AppThunk => async (dispatch) => {
-  await deleteImage(img);
+export const removeImage = (img: PhotoDetail): AppThunk => async () => {
+  await deletePhotoFromAS(img);
+  await deletePhoto(img.path);
 };
 
 export const { addImage, setImages } = imageSlice.actions;

@@ -1,4 +1,4 @@
-export interface ImageDetail {
+export interface PhotoDetail {
   path: string;
   name: string;
   font: string;

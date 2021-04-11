@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { RootStackParamList } from '../../App';
-import { ImageDetail } from '../common/Interfaces';
+import { PhotoDetail } from '../common/Interfaces';
 import { removeImage, saveImage } from '../reducers/imageSlice';
 import { RootState } from '../reducers/rootReducer';
 import Draggable from 'react-native-draggable';
@@ -20,8 +20,8 @@ import Toast from 'react-native-simple-toast';
 import Button from '../common/components/Button';
 import FormatBox from './FormatBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { copyFile } from 'react-native-fs';
-import { deleteFile, IMAGE_SAVE_PATH } from '../common/FileUtils';
+import { IMAGE_SAVE_PATH } from '../common/FileUtils';
+import { copyPhoto, deletePhoto } from '../common/PhotoHelper';
 
 type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Sticker'>;
@@ -37,7 +37,7 @@ const StickerScreen = ({
     params: { url },
   },
 }: Props): JSX.Element => {
-  const defaultStyle: ImageDetail = {
+  const defaultStyle: PhotoDetail = {
     path: url,
     name: '',
     x: 50,
@@ -54,7 +54,7 @@ const StickerScreen = ({
   const [imageName, setImageName] = useState('');
   const { allImages } = useSelector((state: RootState) => state.images);
   const [error, setError] = useState('');
-  const [detail, setDetail] = useState<ImageDetail>(defaultStyle);
+  const [detail, setDetail] = useState<PhotoDetail>(defaultStyle);
   const draggableRef = useRef<Text>(null);
   const [showFormat, setShowFormat] = useState(true);
   const [textStyle, setTextStyle] = useState({});
@@ -95,10 +95,10 @@ const StickerScreen = ({
     setShowFormat(!showFormat);
   };
 
-  const beginSavingImage = () => {
+  const beginSavingImage = async () => {
     savePressed.current = true;
     const imageWithSameName = allImages.filter(
-      (img: ImageDetail) => img.name === imageName,
+      (img: PhotoDetail) => img.name === imageName,
     );
     if (imageWithSameName.length) {
       setError('Image with name ' + imageName + ' already exists');
@@ -112,17 +112,13 @@ const StickerScreen = ({
 
     const picturePath = IMAGE_SAVE_PATH + '/' + detail.name + '.jpg';
 
-    //copy from app camera folder to outer picture folder
-    copyFile(detail.path, picturePath).then(() => {
-      //delete file from app camera cache folder
-      deleteFile(detail.path).then(() => {
-        detail.path = 'file:///' + picturePath;
-        setDetail(detail);
-        storeImageInAsyncCache();
-        navigation.popToTop();
-        Toast.show('Image saved', Toast.LONG);
-      });
-    });
+    await copyPhoto(detail.path, picturePath); //copy from app camera folder to outer picture folder
+    await deletePhoto(detail.path); //delete file from app camera cache folder
+    detail.path = 'file:///' + picturePath;
+    setDetail(detail);
+    storeImageInAsyncCache();
+    navigation.popToTop();
+    Toast.show('Image saved', Toast.LONG);
   };
 
   const storeImageInAsyncCache = () => {
@@ -133,7 +129,7 @@ const StickerScreen = ({
     if (showFormat) setShowFormat(false);
   };
 
-  const onDetailChange = (dt: ImageDetail | null) => {
+  const onDetailChange = (dt: PhotoDetail | null) => {
     if (dt === null) return;
 
     const style = [

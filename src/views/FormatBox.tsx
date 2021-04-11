@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ImageDetail } from '../common/Interfaces';
+import { PhotoDetail } from '../common/Interfaces';
 import DropDown from '../common/components/DropDown';
 import ColorPicker from '../common/components/ColorPicker';
 
@@ -9,9 +9,9 @@ interface Props {
   showFormat: boolean;
   imageName: string;
   setImageName: Dispatch<SetStateAction<string>>;
-  detail: ImageDetail;
-  setDetail: Dispatch<SetStateAction<ImageDetail>>;
-  onDetailChange: (detail: ImageDetail) => void;
+  detail: PhotoDetail;
+  setDetail: Dispatch<SetStateAction<PhotoDetail>>;
+  onDetailChange: (detail: PhotoDetail) => void;
   error: string;
 }
 
@@ -55,7 +55,7 @@ const FormatBox = ({
   }, []);
 
   const updateDetail = (type: TYPE, value = '') => {
-    let update: ImageDetail = { ...detail };
+    let update: PhotoDetail = { ...detail };
 
     switch (type) {
       case TYPE.TEXT:

@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/common/FileUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/FileUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/ImageSaver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/PhotoHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Interfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/MarkerUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/imageSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/imageSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/FormatBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/FormatBox.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GalleryView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ImageView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/StickerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +82,19 @@
       <recent name="C:\Users\vigya\Desktop\projects\photoApp\src" />
       <recent name="C:\Users\vigya\Desktop\projects\photoApp\Assets\Fonts" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
