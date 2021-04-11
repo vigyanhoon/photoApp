@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ImageView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/FileUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/FileUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GalleryView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/StickerScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

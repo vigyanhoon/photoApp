@@ -20,6 +20,8 @@ import Toast from 'react-native-simple-toast';
 import Button from '../common/components/Button';
 import FormatBox from './FormatBox';
 import { useDispatch, useSelector } from 'react-redux';
+import { copyFile } from 'react-native-fs';
+import { deleteFile, IMAGE_SAVE_PATH } from '../common/FileUtils';
 
 type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Sticker'>;
@@ -108,13 +110,22 @@ const StickerScreen = ({
       return;
     }
 
-    storeImage();
+    const picturePath = IMAGE_SAVE_PATH + '/' + detail.name + '.jpg';
 
-    navigation.popToTop();
-    Toast.show('Image saved', Toast.LONG);
+    //copy from app camera folder to outer picture folder
+    copyFile(detail.path, picturePath).then(() => {
+      //delete file from app camera cache folder
+      deleteFile(detail.path).then(() => {
+        detail.path = 'file:///' + picturePath;
+        setDetail(detail);
+        storeImageInAsyncCache();
+        navigation.popToTop();
+        Toast.show('Image saved', Toast.LONG);
+      });
+    });
   };
 
-  const storeImage = () => {
+  const storeImageInAsyncCache = () => {
     dispatch(saveImage(detail));
   };
 

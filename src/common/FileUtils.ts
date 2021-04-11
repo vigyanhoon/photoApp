@@ -7,7 +7,7 @@ interface error {
   code: string;
 }
 
-export const CAMERA_PATH = 'file:///data/user/0/com.photoapp/cache/Camera/';
+export const IMAGE_SAVE_PATH = RNFS.PicturesDirectoryPath + '/photoApp';
 
 export const deleteFile = async (path: string): Promise<void> => {
   const file = await RNFS.stat(path);
@@ -56,15 +56,15 @@ export const copyFileToApp = async (source: string): Promise<string> => {
     source.lastIndexOf('/') + 1,
     source.length,
   );
-  const destination = CAMERA_PATH + imageName;
+  const destination = IMAGE_SAVE_PATH + imageName;
   await copyFile(source, destination);
   return destination;
 };
 
 export const createCameraFolder = (): void => {
-  RNFS.mkdir(CAMERA_PATH)
+  RNFS.mkdir(IMAGE_SAVE_PATH)
     .then(() => {
-      console.log('Path created ' + CAMERA_PATH);
+      console.log('Path created ' + IMAGE_SAVE_PATH);
     })
     .catch((err: error) => {
       console.log(err.message, err.code);

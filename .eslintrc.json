@@ -38,6 +38,7 @@
         "react-native/no-inline-styles": 0,
         "react-native/no-color-literals": 0,
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }]
+        "@typescript-eslint/no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }],
+        "@typescript-eslint/no-var-requires": 0
     }
 }
