@@ -10,7 +10,14 @@ interface Props {
   color?: string;
 }
 
-const Button = ({ title, onPress, height, bg, color, width }: Props) => {
+const Button = ({
+  title,
+  onPress,
+  height,
+  bg,
+  color,
+  width,
+}: Props): JSX.Element => {
   return (
     <TouchableOpacity
       onPress={onPress}

@@ -8,6 +8,7 @@ import {
 } from 'react-native-image-picker';
 import { RootStackParamList } from '../../App';
 import { copyFileToApp } from '../common/FileUtils';
+import { getPermissions } from '../common/Utils';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -30,6 +31,8 @@ const Home = ({ navigation }: Props): JSX.Element => {
       }
     });
   };
+
+  getPermissions();
 
   const copyImage = async (path: string) => {
     const savedPath = await copyFileToApp(path);

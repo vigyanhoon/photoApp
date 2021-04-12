@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/Utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/components/Alert.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/FileUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/FileUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/ImageSaver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/PhotoHelper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/MarkerUtil.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/imageSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/imageSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/FormatBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/FormatBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GalleryView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ImageView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/StickerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +131,8 @@
       <workItem from="1618049246396" duration="160000" />
       <workItem from="1618049418757" duration="9539000" />
       <workItem from="1618065902400" duration="1871000" />
+      <workItem from="1618207562172" duration="9000" />
+      <workItem from="1618207807681" duration="2842000" />
     </task>
     <servers />
   </component>
