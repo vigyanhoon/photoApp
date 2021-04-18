@@ -1,4 +1,4 @@
-import { Alert, PermissionsAndroid } from 'react-native';
+import { Alert, Dimensions, PermissionsAndroid } from 'react-native';
 
 export const getPermissions = async (): Promise<boolean> => {
   try {
@@ -25,3 +25,6 @@ export const getPermissions = async (): Promise<boolean> => {
     return false;
   }
 };
+
+export const windowWidth = Dimensions.get('window').width;
+export const windowHeight = Dimensions.get('window').height;

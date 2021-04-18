@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="126285e2-c5ba-414e-80ed-f3a28296cfb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/common/Utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/components/Alert.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/CameraView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CameraView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/GalleryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/GalleryView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ImageView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ImageView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/StickerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/StickerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +53,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JSON" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.16.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.37" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/eslint" />
@@ -66,7 +71,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="C:\Users\Sanjay\Desktop\projects\photoApp\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -74,19 +79,6 @@
       <recent name="C:\Users\vigya\Desktop\projects\photoApp\src" />
       <recent name="C:\Users\vigya\Desktop\projects\photoApp\Assets\Fonts" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -133,6 +125,11 @@
       <workItem from="1618065902400" duration="1871000" />
       <workItem from="1618207562172" duration="9000" />
       <workItem from="1618207807681" duration="2842000" />
+      <workItem from="1618306768792" duration="2149000" />
+      <workItem from="1618669235518" duration="1302000" />
+      <workItem from="1618671558811" duration="125000" />
+      <workItem from="1618671696285" duration="3924000" />
+      <workItem from="1618740989956" duration="4782000" />
     </task>
     <servers />
   </component>

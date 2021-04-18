@@ -119,7 +119,8 @@ const ImageView = ({
       onSwipe={(direction) => onSwipe(direction)}>
       <View style={styles.body} onTouchEnd={() => setShowMenu(false)}>
         <ImageBackground
-          style={styles.image}
+          style={styles.imageBackground}
+          imageStyle={styles.image}
           source={{ uri: currentImage.path }}>
           {showMenu && <RightMenu />}
           <Text
@@ -163,11 +164,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-  image: {
+  imageBackground: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+  },
+  image: {
+    resizeMode: 'stretch',
   },
   moreButton: {
     height: 50,

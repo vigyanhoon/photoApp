@@ -13,11 +13,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createCameraFolder } from './src/common/FileUtils';
 import StickerScreen from './src/views/StickerScreen';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { TakePictureResponse } from 'react-native-camera';
 
 export type RootStackParamList = {
   Home: undefined;
   Camera: undefined;
-  Sticker: { url: string };
+  Sticker: { imageData: TakePictureResponse };
   Gallery: undefined;
   Image: { index: number };
 };

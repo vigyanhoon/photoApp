@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Button,
-  Dimensions,
   Image,
   ScrollView,
   StyleSheet,
@@ -16,8 +15,8 @@ import { getImages } from '../reducers/imageSlice';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../App';
 import { PhotoDetail } from '../common/Interfaces';
+import { windowWidth } from '../common/Utils';
 
-const windowWidth = Dimensions.get('window').width;
 const thumbWidth = windowWidth / 3 - 3 * 10;
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Gallery'>;

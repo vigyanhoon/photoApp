@@ -15,13 +15,15 @@ import { PhotoDetail } from '../common/Interfaces';
 import { removeImage, saveImage } from '../reducers/imageSlice';
 import { RootState } from '../reducers/rootReducer';
 import Draggable from 'react-native-draggable';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp, useHeaderHeight } from '@react-navigation/stack';
 import Toast from 'react-native-simple-toast';
 import Button from '../common/components/Button';
 import FormatBox from './FormatBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMAGE_SAVE_PATH } from '../common/FileUtils';
 import { copyPhoto, deletePhoto } from '../common/PhotoHelper';
+import Marker from 'react-native-image-marker';
+import { windowHeight, windowWidth } from '../common/Utils';
 
 type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Sticker'>;
@@ -34,11 +36,11 @@ interface Props {
 const StickerScreen = ({
   navigation,
   route: {
-    params: { url },
+    params: { imageData },
   },
 }: Props): JSX.Element => {
   const defaultStyle: PhotoDetail = {
-    path: url,
+    path: imageData.uri,
     name: '',
     x: 50,
     y: 500,
@@ -59,6 +61,7 @@ const StickerScreen = ({
   const [showFormat, setShowFormat] = useState(true);
   const [textStyle, setTextStyle] = useState({});
   const savePressed = useRef(false);
+  const headerHeight = useHeaderHeight();
 
   useLayoutEffect(() => {
     const headerRight = () => (
@@ -119,6 +122,36 @@ const StickerScreen = ({
     storeImageInAsyncCache();
     navigation.popToTop();
     Toast.show('Image saved', Toast.LONG);
+
+    Marker.markText({
+      src: { uri: detail.path },
+      text: detail.name,
+      X: (imageData.width / windowWidth) * detail.x,
+      Y: (imageData.height / (windowHeight + headerHeight)) * detail.y,
+      color: detail.color,
+      fontName: detail.font,
+      fontSize: (imageData.width / windowWidth) * detail.size,
+      shadowStyle: {
+        dx: 10.5,
+        dy: 20.8,
+        radius: 20.9,
+        color: '#bab9b9',
+      },
+      textBackgroundStyle: {
+        type: 'stretchX',
+        paddingX: 0,
+        paddingY: 0,
+        color: 'rgba(0, 0, 0, 0)',
+      },
+      scale: 1,
+      quality: 100,
+    })
+      .then((res) => {
+        console.log('the path is' + res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const storeImageInAsyncCache = () => {
@@ -155,7 +188,7 @@ const StickerScreen = ({
 
   return (
     <View style={styles.body}>
-      <ImageBackground style={styles.image} source={{ uri: url }}>
+      <ImageBackground style={styles.image} source={{ uri: imageData.uri }}>
         <FormatBox
           imageName={imageName}
           showFormat={showFormat}
