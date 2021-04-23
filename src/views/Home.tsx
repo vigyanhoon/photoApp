@@ -40,6 +40,15 @@ const Home = ({ navigation }: Props): JSX.Element => {
   };
 
   const openCamera = () => {
+    // const data = {
+    //   deviceOrientation: 1,
+    //   height: 3024,
+    //   pictureOrientation: 1,
+    //   uri:
+    //     'file:///data/user/0/com.photoapp/cache/Camera/da14a95a-8207-4e4e-a194-79cb159df394.jpg',
+    //   width: 4032,
+    // };
+    // navigation.navigate('Sticker', { imageData: data });
     navigation.navigate('Camera');
   };
 

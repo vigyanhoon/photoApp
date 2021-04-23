@@ -20,6 +20,8 @@ const CameraView = ({ navigation }: Props): JSX.Element => {
   const takePicture = async function (camera: RNCamera) {
     const options = { quality: 0.5, base64: true };
     const imageData = await camera.takePictureAsync(options);
+    const { base64, ...exceptBase64 } = imageData;
+    console.log('captured image details', exceptBase64);
     navigation.navigate('Sticker', { imageData: imageData });
   };
 

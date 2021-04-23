@@ -22,7 +22,7 @@ import FormatBox from './FormatBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMAGE_SAVE_PATH } from '../common/FileUtils';
 import { copyPhoto, deletePhoto } from '../common/PhotoHelper';
-import Marker from 'react-native-image-marker';
+import Marker, { TextBackgroundType } from 'react-native-image-marker';
 import { windowHeight, windowWidth } from '../common/Utils';
 
 type RouteProps = RouteProp<RootStackParamList, 'Sticker'>;
@@ -123,22 +123,32 @@ const StickerScreen = ({
     navigation.popToTop();
     Toast.show('Image saved', Toast.LONG);
 
+    console.log('details for marker is ' + imageData);
+    const isHorizontal =
+      imageData.pictureOrientation === 3 || imageData.pictureOrientation === 4;
+    const unitWidth = isHorizontal
+      ? imageData.width / (windowHeight - headerHeight)
+      : imageData.height / windowWidth;
+    const unitHeight = isHorizontal
+      ? imageData.height / windowWidth
+      : imageData.width / (windowHeight - headerHeight);
+
     Marker.markText({
       src: { uri: detail.path },
       text: detail.name,
-      X: (imageData.width / windowWidth) * detail.x,
-      Y: (imageData.height / (windowHeight + headerHeight)) * detail.y,
+      X: unitWidth * detail.x,
+      Y: unitHeight * detail.y,
       color: detail.color,
       fontName: detail.font,
-      fontSize: (imageData.width / windowWidth) * detail.size,
+      fontSize: unitWidth * detail.size,
       shadowStyle: {
-        dx: 10.5,
-        dy: 20.8,
-        radius: 20.9,
-        color: '#bab9b9',
+        dx: 0,
+        dy: 0,
+        radius: 0,
+        color: 'rgba(0, 0, 0, 0)',
       },
       textBackgroundStyle: {
-        type: 'stretchX',
+        type: TextBackgroundType.stretchX,
         paddingX: 0,
         paddingY: 0,
         color: 'rgba(0, 0, 0, 0)',
@@ -182,13 +192,31 @@ const StickerScreen = ({
     _state: PanResponderGestureState,
     bounds: { left: number; top: number },
   ) => {
+    console.log('windowWidth ' + windowWidth);
+    console.log('imageData.width ' + imageData.width);
+    console.log('bounds.left ' + bounds.left);
+    console.log(
+      'imageData.width / windowWidth ' + imageData.width / windowWidth,
+    );
+    console.log(
+      'mageData.width / windowWidth) * bounds.left ' +
+        (imageData.height / windowWidth) * bounds.left,
+    );
+    console.log(
+      '(imageData.height / windowHeight) * bounds.top ' +
+        (imageData.width / (windowHeight - 50)) * bounds.top,
+    );
+    console.log('===========================');
     const updated = { ...detail, x: bounds.left, y: bounds.top };
     setDetail(updated);
   };
 
   return (
     <View style={styles.body}>
-      <ImageBackground style={styles.image} source={{ uri: imageData.uri }}>
+      <ImageBackground
+        style={styles.imageBackground}
+        imageStyle={styles.image}
+        source={{ uri: imageData.uri }}>
         <FormatBox
           imageName={imageName}
           showFormat={showFormat}
@@ -214,10 +242,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     minHeight: Math.round(Dimensions.get('window').height),
   },
-  image: {
+  imageBackground: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  image: {
+    resizeMode: 'stretch',
   },
   headerButtonContainer: {
     margin: 10,
