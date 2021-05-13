@@ -113,6 +113,28 @@ const ImageView = ({
     );
   };
 
+  const TextView = () => {
+    return null;
+    return (
+      <Text
+        style={[
+          styles.imageLabel,
+          { fontFamily: currentImage.font },
+          { fontSize: currentImage.size },
+          { left: currentImage.x },
+          { top: currentImage.y },
+          { color: currentImage.color },
+          { fontWeight: currentImage.bold ? 'bold' : 'normal' },
+          { fontStyle: currentImage.italic ? 'italic' : 'normal' },
+          {
+            textDecorationLine: currentImage.underline ? 'underline' : 'none',
+          },
+        ]}>
+        {currentImage.name}
+      </Text>
+    );
+  };
+
   return (
     <GestureRecognizer
       style={styles.body}
@@ -123,24 +145,7 @@ const ImageView = ({
           imageStyle={styles.image}
           source={{ uri: currentImage.path }}>
           {showMenu && <RightMenu />}
-          <Text
-            style={[
-              styles.imageLabel,
-              { fontFamily: currentImage.font },
-              { fontSize: currentImage.size },
-              { left: currentImage.x },
-              { top: currentImage.y },
-              { color: currentImage.color },
-              { fontWeight: currentImage.bold ? 'bold' : 'normal' },
-              { fontStyle: currentImage.italic ? 'italic' : 'normal' },
-              {
-                textDecorationLine: currentImage.underline
-                  ? 'underline'
-                  : 'none',
-              },
-            ]}>
-            {currentImage.name}
-          </Text>
+          <TextView />
           <IconButton
             icon="arrow-left-bold"
             size={50}

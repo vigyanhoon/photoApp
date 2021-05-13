@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { RNCamera } from 'react-native-camera';
+import { RNCamera, TakePictureOptions } from 'react-native-camera';
 import { RootStackParamList } from '../../App';
 
 const PendingView = () => (
@@ -18,8 +18,13 @@ interface Props {
 
 const CameraView = ({ navigation }: Props): JSX.Element => {
   const takePicture = async function (camera: RNCamera) {
-    const options = { quality: 0.5, base64: true };
+    const options: TakePictureOptions = {
+      quality: 0.5,
+      base64: true,
+      orientation: 'portrait',
+    };
     const imageData = await camera.takePictureAsync(options);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { base64, ...exceptBase64 } = imageData;
     console.log('captured image details', exceptBase64);
     navigation.navigate('Sticker', { imageData: imageData });

@@ -98,7 +98,7 @@ const StickerScreen = ({
     setShowFormat(!showFormat);
   };
 
-  const beginSavingImage = async () => {
+  const beginSavingImage = () => {
     savePressed.current = true;
     const imageWithSameName = allImages.filter(
       (img: PhotoDetail) => img.name === imageName,
@@ -113,25 +113,8 @@ const StickerScreen = ({
       return;
     }
 
-    const picturePath = IMAGE_SAVE_PATH + '/' + detail.name + '.jpg';
-
-    await copyPhoto(detail.path, picturePath); //copy from app camera folder to outer picture folder
-    await deletePhoto(detail.path); //delete file from app camera cache folder
-    detail.path = 'file:///' + picturePath;
-    setDetail(detail);
-    storeImageInAsyncCache();
-    navigation.popToTop();
-    Toast.show('Image saved', Toast.LONG);
-
-    console.log('details for marker is ' + imageData);
-    const isHorizontal =
-      imageData.pictureOrientation === 3 || imageData.pictureOrientation === 4;
-    const unitWidth = isHorizontal
-      ? imageData.width / (windowHeight - headerHeight)
-      : imageData.height / windowWidth;
-    const unitHeight = isHorizontal
-      ? imageData.height / windowWidth
-      : imageData.width / (windowHeight - headerHeight);
+    const unitWidth = imageData.height / windowWidth;
+    const unitHeight = imageData.width / (windowHeight - headerHeight);
 
     Marker.markText({
       src: { uri: detail.path },
@@ -156,8 +139,16 @@ const StickerScreen = ({
       scale: 1,
       quality: 100,
     })
-      .then((res) => {
-        console.log('the path is' + res);
+      .then(async (path) => {
+        console.log('the path is from marker is ', path);
+        const picturePath = IMAGE_SAVE_PATH + '/' + detail.name + '.jpg';
+        await copyPhoto(path, picturePath); //copy from app camera folder to outer picture folder
+        await deletePhoto(path); //delete file from app camera cache folder
+        detail.path = 'file:///' + picturePath;
+        setDetail(detail);
+        storeImageInAsyncCache();
+        navigation.popToTop();
+        Toast.show('Image saved', Toast.LONG);
       })
       .catch((err) => {
         console.log(err);
@@ -192,21 +183,6 @@ const StickerScreen = ({
     _state: PanResponderGestureState,
     bounds: { left: number; top: number },
   ) => {
-    console.log('windowWidth ' + windowWidth);
-    console.log('imageData.width ' + imageData.width);
-    console.log('bounds.left ' + bounds.left);
-    console.log(
-      'imageData.width / windowWidth ' + imageData.width / windowWidth,
-    );
-    console.log(
-      'mageData.width / windowWidth) * bounds.left ' +
-        (imageData.height / windowWidth) * bounds.left,
-    );
-    console.log(
-      '(imageData.height / windowHeight) * bounds.top ' +
-        (imageData.width / (windowHeight - 50)) * bounds.top,
-    );
-    console.log('===========================');
     const updated = { ...detail, x: bounds.left, y: bounds.top };
     setDetail(updated);
   };
